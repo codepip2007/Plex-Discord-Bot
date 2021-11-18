@@ -1,4 +1,4 @@
-import 'webserver.js'
+const server = require('./webserver.js')
 import DiscordJS, { Intents } from 'discord.js'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -21,5 +21,7 @@ client.on('messageCreate', (message) => {
         })
     }
 })
+
+server()
 
 client.login(process.env.TOKEN)

@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("webserver.js");
+const server = require('./webserver.js');
 const discord_js_1 = __importStar(require("discord.js"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -42,4 +42,5 @@ client.on('messageCreate', (message) => {
         });
     }
 });
+server();
 client.login(process.env.TOKEN);
