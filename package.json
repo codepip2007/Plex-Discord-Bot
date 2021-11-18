@@ -1,7 +1,6 @@
 {
   "name": "soul-fire-bot",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,6 +16,16 @@
     "node.js": "0.0.1-security"
   },
   "devDependencies": {
+    "node": "^16.13.0",
     "typescript": "^4.5.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codepip2007/SFBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codepip2007/SFBot/issues"
+  },
+  "homepage": "https://github.com/codepip2007/SFBot#readme",
+  "description": ""
 }
