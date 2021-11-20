@@ -18,29 +18,47 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const server = require('./webserver.js');
 const discord_js_1 = __importStar(require("discord.js"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+const wokcommands_1 = __importDefault(require("wokcommands"));
+const path_1 = __importDefault(require("path"));
+require("dotenv/config");
 const client = new discord_js_1.default.Client({
     intents: [
         discord_js_1.Intents.FLAGS.GUILDS,
         discord_js_1.Intents.FLAGS.GUILD_MESSAGES
     ]
 });
-client.on('ready', () => {
+client.on('ready', () => __awaiter(void 0, void 0, void 0, function* () {
     console.log('The bot is ready');
-});
-client.on('messageCreate', (message) => {
-    if (message.content === 'ping') {
-        message.reply({
-            content: 'pong'
-        });
-    }
-});
-server();
+    // await mongoose.connect(
+    //     process.env.MONDO_URI || '', 
+    //     {
+    //     keepAlive: true
+    //     }
+    //     )
+    new wokcommands_1.default(client, {
+        commandDir: path_1.default.join(__dirname, 'commands'),
+        typeScript: true,
+        //delete below for global command
+        testServers: '900321207277195284',
+        //delete above for global command
+        mongoUri: process.env.MONGO_URI,
+        dbOptions: {
+            keepAlive: true
+        }
+    });
+}));
 client.login(process.env.TOKEN);

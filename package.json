@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc -w --skipLibCheck"
+    "tsc": "tsc -w --skipLibCheck",
+    "dev": "nodemon index.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +14,9 @@
     "@types/node": "^16.11.8",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
-    "node.js": "0.0.1-security"
+    "mongoose": "^6.0.13",
+    "node.js": "0.0.1-security",
+    "wokcommands": "^1.5.3"
   },
   "devDependencies": {
     "node": "^16.13.0",
