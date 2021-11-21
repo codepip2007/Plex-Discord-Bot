@@ -60,7 +60,7 @@ export default {
                 inline: true
             },
             {
-                name: '!addrole',
+                name: '!addrole [channel] [messageId] [role @]',
                 value: 'Adds role to role select menu',
                 inline: true
             }
