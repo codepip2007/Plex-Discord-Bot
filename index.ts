@@ -1,7 +1,6 @@
 import DiscordJS, { Intents } from 'discord.js'
 import WOKCommands from 'wokcommands'
 import path from 'path'
-import dotenv from 'dotenv'
 import 'dotenv/config'
 const client = new DiscordJS.Client({
   // These intents are recommended for the built in help menu
@@ -26,9 +25,14 @@ client.on('ready', () => {
     testServers: '900321207277195284',
     // // Pass in the new dbOptions
     // dbOptions,
-    // // Pass in your own mongo connection URI
+    // Pass in your own mongo connection URI
     // mongoUri: process.env.MONGO
   })
-  })
+  
+ });
+  process.on('unhandledRejection', error => {
+    console.error('Unhandled promise rejection:', error);
+  });
+
 client.login(process.env.TOKEN)
 

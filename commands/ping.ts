@@ -5,7 +5,7 @@ export default {
     description: 'Replies with pong',
 
     //delete below for global command
-    slash: 'both',
+    slash: false,
     testOnly: true,
     //delete above for global command
 

@@ -39,7 +39,7 @@ export default {
 
         collector.on('end', async (collection) => {
             collection.forEach((click) => {
-                console.log(click.user.id, click.customId)
+                // console.log(click.user.id, click.customId)
             })
 
             if (collection.first()?.customId === 'yes') {

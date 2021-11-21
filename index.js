@@ -18,15 +18,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -36,29 +27,36 @@ const wokcommands_1 = __importDefault(require("wokcommands"));
 const path_1 = __importDefault(require("path"));
 require("dotenv/config");
 const client = new discord_js_1.default.Client({
+    // These intents are recommended for the built in help menu
     intents: [
         discord_js_1.Intents.FLAGS.GUILDS,
-        discord_js_1.Intents.FLAGS.GUILD_MESSAGES
-    ]
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGES,
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    ],
 });
-client.on('ready', () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('The bot is ready');
-    // await mongoose.connect(
-    //     process.env.MONDO_URI || '', 
-    //     {
-    //     keepAlive: true
-    //     }
-    //     )
+client.on('ready', () => {
+    console.log('The bot is ready!');
+    // const dbOptions = {
+    //   // These are the default values
+    //   keepAlive: true
+    // }
     new wokcommands_1.default(client, {
-        commandDir: path_1.default.join(__dirname, 'commands'),
+        // The name of the local folder for your command files
+        commandsDir: path_1.default.join(__dirname, 'commands'),
+        // Allow importing of .ts files if you are using ts-node
         typeScript: true,
-        //delete below for global command
+        // Specify which are the Test Servers
         testServers: '900321207277195284',
-        //delete above for global command
-        mongoUri: process.env.MONGO_URI,
-        dbOptions: {
-            keepAlive: true
+        // // Pass in the new dbOptions
+        // dbOptions,
+        // Pass in your own mongo connection URI
+        // mongoUri: process.env.MONGO
+    });
+    client.on('message', message => {
+        if (message.content.startsWith("!")) {
+            let input = message.content.split(" ").slice(1).join(" "); // Removes the prefix
+            message.delete(); // Deletes the message
         }
     });
-}));
+});
 client.login(process.env.TOKEN);
