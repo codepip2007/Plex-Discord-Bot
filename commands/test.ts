@@ -5,7 +5,6 @@ export default {
     category: 'Testing',
     description: 'testing',
     slash: true,
-    testOnly: true,
 
     callback: async ({ interaction: msgInt, channel }) => {
         const row = new MessageActionRow()

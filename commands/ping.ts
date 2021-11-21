@@ -6,7 +6,6 @@ export default {
 
     //delete below for global command
     slash: false,
-    testOnly: true,
     //delete above for global command
 
     callback: ({}) => {

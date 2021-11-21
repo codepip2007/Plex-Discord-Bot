@@ -17,7 +17,7 @@ export default {
         .setTitle('Soul Fire Bot Commands')
         .setColor('#1da4ed')
         .setAuthor('Soul Fire')
-        .setFooter('Copyright Soul Fire')
+        .setFooter('Commands are subject to permissions!')
         .addFields([
             {
                 name: '/test',
@@ -35,7 +35,7 @@ export default {
                 inline: true,
             },
             {
-                name: '!verify',
+                name: '!verifyme [Full Name]',
                 value: 'Get veified on the server',
                 inline: true,
             },
@@ -48,6 +48,21 @@ export default {
                 name: '!kick [user] [reason]',
                 value: 'Kicks a user',
                 inline: true,
+            },
+            {
+                name: '!status [status]',
+                value: 'Sets the bot\'s status (Only available to bot owners)',
+                inline: true,
+            },
+            {
+                name: '!send [channel] [text]',
+                value: 'Sends specified text to the mentioned channel',
+                inline: true
+            },
+            {
+                name: '!addrole',
+                value: 'Adds role to role select menu',
+                inline: true
             }
         ])
 

@@ -19,10 +19,14 @@ client.on('ready', () => {
   new WOKCommands(client, {
     // The name of the local folder for your command files
     commandsDir: path.join(__dirname, 'commands'),
+    // The name of the local folder for your feature files
+    featuresDir: path.join(__dirname, 'features'),
     // Allow importing of .ts files if you are using ts-node
     typeScript: true,
     // Specify which are the Test Servers
     testServers: '900321207277195284',
+    // Specify which users are bot owners
+    botOwners: '759374512256057344',
     // // Pass in the new dbOptions
     // dbOptions,
     // Pass in your own mongo connection URI
