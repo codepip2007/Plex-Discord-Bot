@@ -11,8 +11,9 @@ export default {
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: ({ message, args }) => {
+    callback: async ({ message, args }) => {
         const target = message.mentions.members?.first()
+        const userDm = target!.id
         if (!target) {
             return 'Please tag someone to kick'
         }
@@ -25,6 +26,7 @@ export default {
         }
         args.shift()
         const reason = args.join(' ')
+        await message.guild!.members.cache.get(userDm)!.send(`**You have been kicked from the server! Reason:** ${reason}`)
 
         target.kick(reason)
         return {

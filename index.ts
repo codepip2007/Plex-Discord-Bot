@@ -29,7 +29,7 @@ client.on('ready', () => {
     botOwners: '759374512256057344',
     // // Pass in the new dbOptions
     // dbOptions,
-    // Pass in your own mongo connection URI
+    // // Pass in your own mongo connection URI
     // mongoUri: process.env.MONGO
   })
   
@@ -38,5 +38,5 @@ client.on('ready', () => {
     console.error('Unhandled promise rejection:', error);
   });
 
-client.login(process.env.TOKEN)
+client.login(process.env.TOKENTEST)
 

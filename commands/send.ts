@@ -8,7 +8,7 @@ export default {
     minArgs: 1,
     expectedArgs: '<channel> <text>',
     expectedArgsTypes: ['CHANNEL', 'STRING'],
-    slash: 'both',
+    slash: false,
     guildOnly: true,
     callback: ({ message, interaction, args }) => {
         const channel = (message ? message.mentions.channels.first() : interaction.options.getChannel('channel')) as TextChannel

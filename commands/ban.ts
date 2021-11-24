@@ -10,8 +10,9 @@ export default {
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: ({ message, args }) => {
+    callback: async ({ message, args }) => {
         const target = message.mentions.members?.first()
+        const userDm = target!.id
         if (!target) {
             return 'Please tag someone to ban'
         }
@@ -24,8 +25,9 @@ export default {
         }
         args.shift()
         const reason = args.join(' ')
+        message.guild!.members.cache.get(userDm)!.send(`**You have been banned from the server! Reason:** ${reason}`)
 
-        target.ban({
+        await target.ban({
             reason,
             days: 7
         })

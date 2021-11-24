@@ -10,7 +10,7 @@ export default {
     expectedArgs: '<channel> <messageId> <role>',
     expectedArgsTypes: ['CHANNEL', 'STRING', 'ROLE'],
 
-    slash: 'both',
+    slash: false,
     guildOnly: true,
 
     init: (client: Client) => {
@@ -64,7 +64,7 @@ export default {
         if(!targetMessage) {
             return 'Unknow message ID'
         }
-        const bot = '910819624503902218'
+        const bot = '912138759229833226'
         if (targetMessage.author.id !== bot) {
             return `Please provide a message ID that was sent from <${bot}>`
         }

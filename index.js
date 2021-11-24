@@ -43,20 +43,21 @@ client.on('ready', () => {
     new wokcommands_1.default(client, {
         // The name of the local folder for your command files
         commandsDir: path_1.default.join(__dirname, 'commands'),
+        // The name of the local folder for your feature files
+        featuresDir: path_1.default.join(__dirname, 'features'),
         // Allow importing of .ts files if you are using ts-node
         typeScript: true,
         // Specify which are the Test Servers
         testServers: '900321207277195284',
+        // Specify which users are bot owners
+        botOwners: '759374512256057344',
         // // Pass in the new dbOptions
         // dbOptions,
-        // Pass in your own mongo connection URI
+        // // Pass in your own mongo connection URI
         // mongoUri: process.env.MONGO
     });
-    client.on('message', message => {
-        if (message.content.startsWith("!")) {
-            let input = message.content.split(" ").slice(1).join(" "); // Removes the prefix
-            message.delete(); // Deletes the message
-        }
-    });
 });
-client.login(process.env.TOKEN);
+process.on('unhandledRejection', error => {
+    console.error('Unhandled promise rejection:', error);
+});
+client.login(process.env.TOKENTEST);

@@ -5,7 +5,7 @@ export default {
     description: 'Sets the bot\'s status',
     minArgs: 1,
     expectedArgs: '<status>',
-    slash: 'both',
+    slash: false,
     ownerOnly: true,
 
     callback: ({ client, text }) => {
@@ -13,11 +13,11 @@ export default {
             status: 'online',
             activities: [
             {
-                name: text
-            }
+                name: text,
+            },
         ]
         })
 
-        return 'Ststus updated'
+        return 'Status updated'
     }
 } as ICommand
