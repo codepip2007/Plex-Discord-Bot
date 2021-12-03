@@ -1,20 +1,25 @@
+import { GuildMember, Interaction } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
     category: 'Moderation',
     description: 'Bans a user',
     permissions: ['ADMINISTRATOR'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: async ({ message, args }) => {
-        const target = message.mentions.members?.first()
+    callback: async ({ message, interaction, args }) => {
+        const target = (message ? message.mentions.members?.first() : interaction.options.getMember('user') as GuildMember)
         const userDm = target!.id
         if (!target) {
-            return 'Please tag someone to ban'
+            return {
+                custom: true,
+                content: 'Please tag someone to ban',
+                ephemeral: true,
+            }
         }
         if (!target.bannable) {
             return {
@@ -25,7 +30,7 @@ export default {
         }
         args.shift()
         const reason = args.join(' ')
-        message.guild!.members.cache.get(userDm)!.send(`**You have been banned from the server! Reason:** ${reason}`)
+        target.send(`**You have been banned from the server! Reason:** ${reason}`)
 
         await target.ban({
             reason,

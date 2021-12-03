@@ -5,17 +5,21 @@ export default {
     category: 'Moderation',
     description: 'Kicks a user',
     permissions: ['ADMINISTRATOR'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: async ({ message, args }) => {
-        const target = message.mentions.members?.first()
+    callback: async ({ message, interaction, args }) => {
+        const target = (message ? message.mentions.members?.first() : interaction.options.getMember('user') as GuildMember)
         const userDm = target!.id
         if (!target) {
-            return 'Please tag someone to kick'
+            return {
+                custom: true,
+                content: 'Please tag someone to kick',
+                ephemeral: true
+            }
         }
         if (!target.kickable) {
             return {
@@ -26,13 +30,13 @@ export default {
         }
         args.shift()
         const reason = args.join(' ')
-        await message.guild!.members.cache.get(userDm)!.send(`**You have been kicked from the server! Reason:** ${reason}`)
+        await target.send(`**You have been kicked from the server! Reason:** ${reason}`)
 
         target.kick(reason)
         return {
             custom: true,
             content: `You kicked <@${target.id}>`,
-            ephemeral: true,
+            ephemeral: true
         }
     }
 } as ICommand

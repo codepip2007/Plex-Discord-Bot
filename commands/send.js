@@ -7,12 +7,16 @@ exports.default = {
     minArgs: 1,
     expectedArgs: '<channel> <text>',
     expectedArgsTypes: ['CHANNEL', 'STRING'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     callback: ({ message, interaction, args }) => {
         const channel = (message ? message.mentions.channels.first() : interaction.options.getChannel('channel'));
         if (!channel || channel.type !== 'GUILD_TEXT') {
-            return 'Please tag a text channel';
+            return {
+                custom: true,
+                content: 'Please tag a text channel',
+                ephemeral: true
+            };
         }
         args.shift(); // Removes the channel from the arguments array
         const text = args.join(' '); // Changes ['hello', 'world'] into 'hello world'

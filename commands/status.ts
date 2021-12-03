@@ -5,7 +5,8 @@ export default {
     description: 'Sets the bot\'s status',
     minArgs: 1,
     expectedArgs: '<status>',
-    slash: false,
+    expectedArgsTypes: ['STRING'],
+    slash: 'both',
     ownerOnly: true,
 
     callback: ({ client, text }) => {
@@ -18,6 +19,10 @@ export default {
         ]
         })
 
-        return 'Status updated'
+        return {
+            custom: true,
+            content: 'Status updated',
+            ephemeral: true,
+        }
     }
 } as ICommand

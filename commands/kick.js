@@ -13,17 +13,21 @@ exports.default = {
     category: 'Moderation',
     description: 'Kicks a user',
     permissions: ['ADMINISTRATOR'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, args }) => __awaiter(void 0, void 0, void 0, function* () {
+    callback: ({ message, interaction, args }) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
-        const target = (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first();
+        const target = (message ? (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first() : interaction.options.getMember('user'));
         const userDm = target.id;
         if (!target) {
-            return 'Please tag someone to kick';
+            return {
+                custom: true,
+                content: 'Please tag someone to kick',
+                ephemeral: true
+            };
         }
         if (!target.kickable) {
             return {
@@ -34,12 +38,12 @@ exports.default = {
         }
         args.shift();
         const reason = args.join(' ');
-        yield message.guild.members.cache.get(userDm).send(`**You have been kicked from the server! Reason:** ${reason}`);
+        yield target.send(`**You have been kicked from the server! Reason:** ${reason}`);
         target.kick(reason);
         return {
             custom: true,
             content: `You kicked <@${target.id}>`,
-            ephemeral: true,
+            ephemeral: true
         };
     })
 };

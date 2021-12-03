@@ -4,12 +4,14 @@ export default {
     category: 'testing',
     description: 'Replies with pong',
 
-    //delete below for global command
-    slash: false,
-    //delete above for global command
+    slash: 'both',
 
     callback: ({}) => {
-        return 'Pong'
+        return {
+            custom: true,
+            content: 'Pong',
+            ephemeral: true
+        }
     }
 } as ICommand
 

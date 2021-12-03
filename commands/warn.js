@@ -17,25 +17,36 @@ exports.default = {
     category: 'Moderation',
     description: 'Warns a user',
     permissions: ['BAN_MEMBERS'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, args }) => __awaiter(void 0, void 0, void 0, function* () {
+    callback: ({ message, interaction, guild, args }) => __awaiter(void 0, void 0, void 0, function* () {
         const client = discord_js_1.default.Client;
-        let target = message.mentions.members.first();
+        let target = (message ? message.mentions.members.first() : interaction.options.getMember('user'));
         let targetId = target.id;
-        let warnChannel = message.guild.channels.cache.find(channel => channel.name === "warnings");
         if (!target) {
-            return 'Please tag someone to warn';
+            return {
+                custom: true,
+                content: 'Please tag someone to warn',
+                ephemeral: true
+            };
         }
         args.shift();
         let reason = args.join(' ');
         if (!reason) {
-            return 'Please provide a reason';
+            return {
+                custom: true,
+                content: 'Please provide a reason',
+                ephemeral: true
+            };
         }
-        yield message.guild.members.cache.get(targetId).send(`**You have been warned in the server! Reason:** ${reason}`);
-        warnChannel.send(`<@${targetId}> has been warned! Reason: ${reason}`);
+        yield target.send(`**You have been warned in the server! Reason:** ${reason}`);
+        return {
+            custom: true,
+            content: `<@${targetId}> has been warned`,
+            ephemeral: true
+        };
     })
 };

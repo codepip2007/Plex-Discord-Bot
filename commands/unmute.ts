@@ -1,21 +1,20 @@
 import { ICommand } from 'wokcommands';
 import { GuildMember } from 'discord.js'
-import { channel } from 'diagnostics_channel';
 
 export default {
     category: 'Moderation',
     description: 'Unmutes a user',
     permissions: ['BAN_MEMBERS'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     minArgs: 1,
     expectedArgs: '<user>',
     expectedArgsTypes: ['USER'],
 
-    callback: async ({ message, args, member }) => {
-        var target = message.mentions.members!.first()
+    callback: async ({ message, interaction, args, member, guild }) => {
+        var target = (message ? message.mentions.members!.first() : interaction.options.getMember('user') as GuildMember)
         let userDm = target!.id
-        let muteRole = message.guild!.roles.cache.find(role => role.name === "Muted");
+        let muteRole =  guild!.roles.cache.find((role) => role.name === 'Muted')
 
         if (!target) {
             return 'Please tag someone to unmute'
@@ -23,6 +22,10 @@ export default {
 
         args.shift()
         target.roles.remove(muteRole!)
-        await message.channel.send(`<@${userDm}> has been unmuted`)
+        return {
+            custom: true,
+            content: `<@${userDm}> has been unmuted`,
+            ephemeral: true
+        }
     }
 } as ICommand

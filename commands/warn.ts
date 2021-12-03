@@ -1,12 +1,12 @@
 import { channel } from 'diagnostics_channel'
-import DiscordJS, { TextChannel } from 'discord.js'
+import DiscordJS, { GuildMember, TextChannel } from 'discord.js'
 import { ICommand } from 'wokcommands'
 
 export default {
     category: 'Moderation',
     description: 'Warns a user',
     permissions: ['BAN_MEMBERS'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
@@ -14,25 +14,35 @@ export default {
 
    
 
-    callback: async ({ message, args }) => {
+    callback: async ({ message, interaction, guild, args }) => {
         const client = DiscordJS.Client
-        let target = message.mentions.members!.first()
+        let target = (message ? message.mentions.members!.first() : interaction.options.getMember('user') as GuildMember)
         let targetId = target!.id
-        let warnChannel = message.guild!.channels.cache.find(channel => channel.name === "warnings") as TextChannel
 
         if (!target) {
-            return 'Please tag someone to warn'
+            return {
+                custom: true,
+                content: 'Please tag someone to warn',
+                ephemeral: true
+            }
         }
         args.shift()
         let reason = args.join(' ')
         if (!reason) {
-            return 'Please provide a reason'
+            return {
+                custom: true,
+                content: 'Please provide a reason',
+                ephemeral: true
+            }
         }
 
-        await message.guild!.members.cache.get(targetId)!.send(`**You have been warned in the server! Reason:** ${reason}`)
+        await target.send(`**You have been warned in the server! Reason:** ${reason}`)
 
-        warnChannel.send(`<@${targetId}> has been warned! Reason: ${reason}`)  
-        message.channel.send(`<@${targetId}> has been warned`)
+        return {
+            custom: true,
+            content: `<@${targetId}> has been warned`,
+            ephemeral: true
+        }
 
     }
 } as ICommand

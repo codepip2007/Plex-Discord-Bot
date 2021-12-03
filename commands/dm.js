@@ -11,24 +11,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     category: 'Moderation',
-    description: 'Creates a DM channel with a user',
+    description: 'Sends a DM to a user1',
     permissions: ['MANAGE_CHANNELS'],
-    slash: false,
+    slash: 'both',
     minArgs: 2,
     expectedArgs: '<user> <message>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, args }) => __awaiter(void 0, void 0, void 0, function* () {
+    callback: ({ message, interaction, args, }) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
-        const target = (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first();
-        const userDm = target.id;
-        // console.log(userDm)
-        if (!target) {
-            return 'Please provide someone to DM';
+        let user;
+        if (message) {
+            user = (_a = message.mentions.users) === null || _a === void 0 ? void 0 : _a.first();
+        }
+        else {
+            user = interaction.options.getUser('user');
+        }
+        if (!user) {
+            return {
+                custom: true,
+                content: 'Please provide someone to DM',
+                ephemeral: true
+            };
         }
         args.shift();
         const text = args.join(' ');
-        // const dmChannel = target.createDM
-        message.guild.members.cache.get(userDm).send(`**Message from a moderator:** ${text}`);
-        return `Message sent to ${target}`;
+        user.send(`**Message from a moderator:** ${text}`);
+        return {
+            custom: true,
+            content: `Message sent to ${user}`,
+            ephemeral: true
+        };
     })
 };

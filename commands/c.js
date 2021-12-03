@@ -13,6 +13,7 @@ const discord_js_1 = require("discord.js");
 exports.default = {
     category: 'Commands',
     description: 'Sends and embed',
+    slash: false,
     callback: ({ message, text }) => __awaiter(void 0, void 0, void 0, function* () {
         const embed = new discord_js_1.MessageEmbed()
             .setDescription("Commands Accepted by Plex")

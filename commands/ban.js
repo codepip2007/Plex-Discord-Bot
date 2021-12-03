@@ -13,17 +13,21 @@ exports.default = {
     category: 'Moderation',
     description: 'Bans a user',
     permissions: ['ADMINISTRATOR'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, args }) => __awaiter(void 0, void 0, void 0, function* () {
+    callback: ({ message, interaction, args }) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
-        const target = (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first();
+        const target = (message ? (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first() : interaction.options.getMember('user'));
         const userDm = target.id;
         if (!target) {
-            return 'Please tag someone to ban';
+            return {
+                custom: true,
+                content: 'Please tag someone to ban',
+                ephemeral: true,
+            };
         }
         if (!target.bannable) {
             return {
@@ -34,7 +38,7 @@ exports.default = {
         }
         args.shift();
         const reason = args.join(' ');
-        message.guild.members.cache.get(userDm).send(`**You have been banned from the server! Reason:** ${reason}`);
+        target.send(`**You have been banned from the server! Reason:** ${reason}`);
         yield target.ban({
             reason,
             days: 7

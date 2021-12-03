@@ -21,12 +21,10 @@ export default {
         messages.forEach((message) => message.delete())
 
         if (amount === 1) {
-            const reply = `Deleted ${size} message.`
-            channel.send(reply)
+            message.channel.send(`Deleted ${size} message.`)
         }
         if (amount > 1) {
-            const reply = `Deleted ${size} messages.`
-            channel.send(reply)
+            message.channel.send(`Deleted ${size} messages.`)
         }
     }
 } as ICommand

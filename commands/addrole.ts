@@ -10,7 +10,7 @@ export default {
     expectedArgs: '<channel> <messageId> <role>',
     expectedArgsTypes: ['CHANNEL', 'STRING', 'ROLE'],
 
-    slash: false,
+    slash: 'both',
     guildOnly: true,
 
     init: (client: Client) => {
@@ -46,14 +46,22 @@ export default {
     callback: async ({ message, interaction, args }) => {
         const channel = (message ? message.mentions.channels.first() : interaction.options.getChannel('channel')) as TextChannel
         if(!channel || channel.type !== 'GUILD_TEXT') {
-            return 'Please tag a text channel'
+            return {
+                custom: true,
+                content: 'Please tag a text channel',
+                ephemeral: true
+            }
         }
 
         const messageId = args[1]
 
         const role = (message ? message.mentions.roles.first() : interaction.options.getRole('role')) as Role
         if (!role) {
-            return 'Unknown role!'
+            return {
+                custom: true,
+                content:'Unknown role!',
+                ephemeral: true,
+            }
         }
 
         const targetMessage = await channel.messages.fetch(messageId, {
@@ -62,11 +70,19 @@ export default {
         })
 
         if(!targetMessage) {
-            return 'Unknow message ID'
+            return {
+                custom: true,
+                content: 'Unknow message ID',
+                ephemeral: true,
+            }
         }
         const bot = '912138759229833226'
         if (targetMessage.author.id !== bot) {
-            return `Please provide a message ID that was sent from <${bot}>`
+            return {
+                custom: true,
+                content: `Please provide a message ID that was sent from <${bot}>`,
+                ephemeral: true,
+            }
         }
 
         let row = targetMessage.components[0] as MessageActionRow 

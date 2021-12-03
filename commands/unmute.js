@@ -13,20 +13,24 @@ exports.default = {
     category: 'Moderation',
     description: 'Unmutes a user',
     permissions: ['BAN_MEMBERS'],
-    slash: false,
+    slash: 'both',
     guildOnly: true,
     minArgs: 1,
     expectedArgs: '<user>',
     expectedArgsTypes: ['USER'],
-    callback: ({ message, args, member }) => __awaiter(void 0, void 0, void 0, function* () {
-        var target = message.mentions.members.first();
+    callback: ({ message, interaction, args, member, guild }) => __awaiter(void 0, void 0, void 0, function* () {
+        var target = (message ? message.mentions.members.first() : interaction.options.getMember('user'));
         let userDm = target.id;
-        let muteRole = message.guild.roles.cache.find(role => role.name === "Muted");
+        let muteRole = guild.roles.cache.find((role) => role.name === 'Muted');
         if (!target) {
             return 'Please tag someone to unmute';
         }
         args.shift();
         target.roles.remove(muteRole);
-        yield message.channel.send(`<@${userDm}> has been unmuted`);
+        return {
+            custom: true,
+            content: `<@${userDm}> has been unmuted`,
+            ephemeral: true
+        };
     })
 };

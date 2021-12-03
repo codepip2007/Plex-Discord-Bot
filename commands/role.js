@@ -16,6 +16,7 @@ exports.default = {
     permissions: ['MANAGE_ROLES'],
     minArgs: 3,
     expectedArgs: `<"${actions.join('", "')}"> <user @> <role @>"`,
+    expectedArgsTypes: ['STRING', 'USER', 'ROLE'],
     slash: false,
     guildOnly: true,
     callback: ({ guild, args }) => __awaiter(void 0, void 0, void 0, function* () {

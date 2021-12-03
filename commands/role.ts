@@ -8,6 +8,7 @@ export default {
     permissions: ['MANAGE_ROLES'],
     minArgs: 3,
     expectedArgs: `<"${actions.join('", "')}"> <user @> <role @>"`,
+    expectedArgsTypes: ['STRING', 'USER', 'ROLE'],
     slash: false,
     guildOnly: true,
 

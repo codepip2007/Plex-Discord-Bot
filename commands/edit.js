@@ -13,13 +13,18 @@ exports.default = {
     category: 'Messages',
     description: 'Edits a message from the bot',
     permissions: ['MANAGE_MESSAGES'],
+    slash: 'both',
     minArgs: 2,
     expectedArgs: '<channel> <message ID> <text>',
     expectedArgsTypes: ['CHANNEL', 'STRING', 'STRING'],
-    callback: ({ message, args }) => __awaiter(void 0, void 0, void 0, function* () {
-        const channel = message.mentions.channels.first();
+    callback: ({ message, interaction, args }) => __awaiter(void 0, void 0, void 0, function* () {
+        const channel = (message ? message.mentions.channels.first() : interaction.options.getChannel('channel'));
         if (!channel || channel.type !== 'GUILD_TEXT') {
-            return 'Please tag a text channel';
+            return {
+                custom: true,
+                content: 'Please tag a text channel',
+                ephemeral: true
+            };
         }
         let id = args[1];
         args.shift();
@@ -29,14 +34,33 @@ exports.default = {
             cache: true,
             force: true,
         });
+        if (!text) {
+            return {
+                custom: true,
+                content: 'Please provide the new content!',
+                ephemeral: true
+            };
+        }
         if (!targetMessage) {
-            return 'Unknow message ID';
+            return {
+                custom: true,
+                content: 'Unknow message ID',
+                ephemeral: true,
+            };
         }
         const bot = '912138759229833226';
         if (targetMessage.author.id !== bot) {
-            return `Please provide a message ID that was sent from <@${bot}>`;
+            return {
+                custom: true,
+                content: `Please provide a message ID that was sent from <@${bot}>`,
+                ephemeral: true
+            };
         }
         targetMessage.edit(text);
-        yield message.channel.send('Message has been edited.');
+        return yield {
+            custom: true,
+            content: 'Message has been edited.',
+            ephemeral: true
+        };
     })
 };

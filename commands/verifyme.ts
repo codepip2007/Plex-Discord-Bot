@@ -15,7 +15,11 @@ export default {
 
 
         if (!name) {
-            return 'Please provide your full name! Example: "!verify John Doe"';
+            return {
+                custom: true,
+                content: 'Please provide your full name! Example: "!verify John Doe"',
+                ephemeral: true
+            };
         } else {
     
         const verConfirm = `**Full Name:** ${name}\n**Discord Username:** ${message.author.tag}\n**Tag:** <@${message.author.id}>`;
