@@ -14,7 +14,7 @@ export default {
 
    
 
-    callback: async ({ message, interaction, guild, args }) => {
+    callback: async ({ message, interaction, args, guild }) => {
         const client = DiscordJS.Client
         let target = (message ? message.mentions.members!.first() : interaction.options.getMember('user') as GuildMember)
         let targetId = target!.id
@@ -36,7 +36,7 @@ export default {
             }
         }
 
-        await target.send(`**You have been warned in the server! Reason:** ${reason}`)
+        await target.send(`**You have been warned in the *${guild!.name}* Discord server! Reason:** ${reason}`)
 
         return {
             custom: true,

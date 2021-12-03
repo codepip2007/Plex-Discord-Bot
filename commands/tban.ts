@@ -115,7 +115,8 @@ export default {
                 ephemeral: true
             }
         }
-        user!.send(`**You have been temporarily banned! Duration:** ${duration}. **Reason:** ${reason}`)
+
+        user!.send(`**You have been temporarily banned in the *${guild!.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`)
 
         return {
             custom: true,

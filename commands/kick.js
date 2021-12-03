@@ -18,7 +18,7 @@ exports.default = {
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, interaction, args }) => __awaiter(void 0, void 0, void 0, function* () {
+    callback: ({ message, interaction, args, guild }) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         const target = (message ? (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first() : interaction.options.getMember('user'));
         const userDm = target.id;
@@ -38,7 +38,7 @@ exports.default = {
         }
         args.shift();
         const reason = args.join(' ');
-        yield target.send(`**You have been kicked from the server! Reason:** ${reason}`);
+        yield target.send(`**You have been kicked from the *${guild.name}* Discord server! Reason:** ${reason}`);
         target.kick(reason);
         return {
             custom: true,

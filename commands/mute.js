@@ -38,7 +38,8 @@ exports.default = {
                 ephemeral: true
             };
         }
-        yield target.send(`**You have been muted in the server! Reason:** ${reason}`);
+        let { name } = guild;
+        yield target.send(`**You have been muted in the *${name}* Discord server! Reason:** ${reason}`);
         target.roles.add(muteRole);
         return {
             custom: true,

@@ -17,7 +17,7 @@ exports.default = {
     minArgs: 2,
     expectedArgs: '<user> <message>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, interaction, args, }) => __awaiter(void 0, void 0, void 0, function* () {
+    callback: ({ message, interaction, args, guild }) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         let user;
         if (message) {
@@ -35,7 +35,7 @@ exports.default = {
         }
         args.shift();
         const text = args.join(' ');
-        user.send(`**Message from a moderator:** ${text}`);
+        user.send(`**Message from a moderator in the *${guild.name}* Discord server:** ${text}`);
         return {
             custom: true,
             content: `Message sent to ${user}`,

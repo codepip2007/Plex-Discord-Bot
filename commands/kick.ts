@@ -11,7 +11,7 @@ export default {
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: async ({ message, interaction, args }) => {
+    callback: async ({ message, interaction, args, guild }) => {
         const target = (message ? message.mentions.members?.first() : interaction.options.getMember('user') as GuildMember)
         const userDm = target!.id
         if (!target) {
@@ -30,7 +30,8 @@ export default {
         }
         args.shift()
         const reason = args.join(' ')
-        await target.send(`**You have been kicked from the server! Reason:** ${reason}`)
+
+        await target.send(`**You have been kicked from the *${guild!.name}* Discord server! Reason:** ${reason}`)
 
         target.kick(reason)
         return {

@@ -128,7 +128,7 @@ export default {
             }
         }
 
-        user!.send(`**You have been temporarily muted! Duration:** ${duration}. **Reason:** ${reason}`)
+        user!.send(`**You have been temporarily muted in the *${guild!.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`)
 
         return {
             custom: true,

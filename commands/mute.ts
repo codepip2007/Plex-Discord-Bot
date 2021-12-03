@@ -35,7 +35,9 @@ export default {
                 ephemeral: true
             }
         }
-        await target.send(`**You have been muted in the server! Reason:** ${reason}`)
+
+        let { name } = guild!
+        await target.send(`**You have been muted in the *${name}* Discord server! Reason:** ${reason}`)
         target.roles.add(muteRole!)
         return {
             custom: true,

@@ -22,7 +22,7 @@ exports.default = {
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, interaction, guild, args }) => __awaiter(void 0, void 0, void 0, function* () {
+    callback: ({ message, interaction, args, guild }) => __awaiter(void 0, void 0, void 0, function* () {
         const client = discord_js_1.default.Client;
         let target = (message ? message.mentions.members.first() : interaction.options.getMember('user'));
         let targetId = target.id;
@@ -42,7 +42,7 @@ exports.default = {
                 ephemeral: true
             };
         }
-        yield target.send(`**You have been warned in the server! Reason:** ${reason}`);
+        yield target.send(`**You have been warned in the *${guild.name}* Discord server! Reason:** ${reason}`);
         return {
             custom: true,
             content: `<@${targetId}> has been warned`,

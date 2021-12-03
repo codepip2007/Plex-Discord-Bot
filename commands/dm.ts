@@ -10,7 +10,7 @@ export default {
     expectedArgs: '<user> <message>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: async ({ message, interaction, args, }) => {
+    callback: async ({ message, interaction, args, guild }) => {
         let user: User | undefined
         if (message) {
             user = message.mentions.users?.first()
@@ -27,7 +27,7 @@ export default {
 
         args.shift()
         const text = args.join(' ')
-        user.send(`**Message from a moderator:** ${text}`)
+        user.send(`**Message from a moderator in the *${guild!.name}* Discord server:** ${text}`)
         return {
             custom: true,
             content: `Message sent to ${user}`,
