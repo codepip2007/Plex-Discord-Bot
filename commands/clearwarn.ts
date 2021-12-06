@@ -3,33 +3,29 @@ import warnSchema from '../models/warn-schema'
 
 export default {
     category: 'Moderation',
-    description: 'Warns a user',
+    description: 'Removes a user\'s warnings',
     requireRoles: true,
     slash: true,
     guildOnly: true,
     
     minArgs: 2,
-    expectedArgs: '<user> <reason>',
+    expectedArgs: '<user> <id>',
     expectedArgsTypes: ['USER', 'STRING'],
 
     callback: async ({ guild, member: staff, interaction }) => {
         let user = interaction.options.getUser('user')
-        let reason = interaction.options.getString('reason')
+        let id = interaction.options.getString('id')
 
-        let warning = await warnSchema.create({
-            userId: user?.id,
-            staffId: staff.id,
-            guildId: guild?.id,
-            reason,
-        })
+        let warning = await warnSchema.findByIdAndDelete(id)
 
         return {
             custom: true,
-            content: `<@${user?.id}> has been warned\n${warning.id}`,
+            content: `Removed warning ${warning.id} from <@${user?.id}>`,
             allowedMentions: {
                 users: [],
             },
             ephemeral: true
         }
+
     }
 } as ICommand

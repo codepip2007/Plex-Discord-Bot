@@ -8,28 +8,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const warn_schema_1 = __importDefault(require("../models/warn-schema"));
 exports.default = {
     category: 'Moderation',
-    description: 'Unmutes a user',
-    permissions: ['BAN_MEMBERS'],
-    slash: 'both',
+    description: 'Removes a user\'s warnings',
+    requireRoles: true,
+    slash: true,
     guildOnly: true,
-    minArgs: 1,
-    expectedArgs: '<user>',
-    expectedArgsTypes: ['USER'],
-    callback: ({ message, interaction, args, member, guild }) => __awaiter(void 0, void 0, void 0, function* () {
-        var target = (message ? message.mentions.members.first() : interaction.options.getMember('user'));
-        let userDm = target.id;
-        let muteRole = guild.roles.cache.find((role) => role.name === 'Muted');
-        if (!target) {
-            return 'Please tag someone to unmute';
-        }
-        args.shift();
-        target.roles.remove(muteRole);
+    testOnly: true,
+    minArgs: 2,
+    expectedArgs: '<user> <id>',
+    expectedArgsTypes: ['USER', 'STRING'],
+    callback: ({ guild, member: staff, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
+        let user = interaction.options.getUser('user');
+        let id = interaction.options.getString('id');
+        let warning = yield warn_schema_1.default.findByIdAndDelete(id);
         return {
             custom: true,
-            content: `<@${userDm}> has been unmuted`,
+            content: `Removed warning ${warning.id} from <@${user === null || user === void 0 ? void 0 : user.id}>`,
+            allowedMentions: {
+                users: [],
+            },
             ephemeral: true
         };
     })

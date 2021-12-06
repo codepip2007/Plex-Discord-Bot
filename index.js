@@ -66,4 +66,4 @@ client.on('ready', () => {
 process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);
 });
-client.login(process.env.TOKENTEST);
+client.login(process.env.TOKEN);
