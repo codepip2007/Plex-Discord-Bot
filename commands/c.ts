@@ -14,104 +14,31 @@ export default {
         .setColor('#1da4ed')
         .setAuthor('Plex by PC')
         .setFooter('Commands are subject to permissions!')
-        .addFields([
-            {
-                name: '/test',
-                value: 'Tests the Bot',
-                inline: true,
-            },
-            {
-                name:'!ping',
-                value: 'Replies with "Pong"',
-                inline: true,
-            },
-            {
-                name: '!c',
-                value: 'Shows all commands',
-                inline: true,
-            },
-            {
-                name: '!verifyme [Full Name]',
-                value: 'Get veified on the server',
-                inline: true,
-            },
-            {
-                name: '!ban [user] [reason]',
-                value: 'Bans a user',
-                inline: true,
-            },
-            {
-                name: '!kick [user] [reason]',
-                value: 'Kicks a user',
-                inline: true,
-            },
-            {
-                name: '!status [status]',
-                value: 'Sets the bot\'s status (Only available to bot owners)',
-                inline: true,
-            },
-            {
-                name: '!send [channel] [text]',
-                value: 'Sends specified text to the mentioned channel',
-                inline: true
-            },
-            {
-                name: '!addrole [channel] [messageId] [role @]',
-                value: 'Adds role to role select menu',
-                inline: true
-            },
-            {
-                name: '!resetsts',
-                value: 'Resets the bot\'s status (Only available to bot owners)',
-                inline: true
-            },
-            {
-                name: '!help',
-                value: 'Displays the bot\'s help menu',
-                inline: true
-            },
-            {
-                name: '!command ["enable" or "disable"] [command name]',
-                value: 'Enable/Disable a command',
-                inline: true
-            },
-            {
-                name: '!dm [user @] [text]',
-                value: 'Sends a direct message to the tagged user',
-                inline: true
-            },
-            {
-                name: '!purge [amount]',
-                value: 'Deletes the specified amount of messages',
-                inline: true
-            },
-            {
-                name: '!role add [user @] [role @]',
-                value: 'Assigns role to user',
-                inline: true,
-            },
-            {
-                name: '!role remove [user @] [role @]',
-                value: 'Removes role from user',
-                inline: true,
-            },
-            {
-                name: '!role has [user @] [role @]',
-                value: 'Checks if user has role',
-                inline: true,
-            },
-            {
-                name: '!mute [user @] [reason]',
-                value: 'Mutes a user',
-                inline: true
-            },
-            {
-                name: '!unmute [user @]',
-                value: 'Unmutes a user',
-                inline: true
-            }
-            
-        ])
+        .addField('/test','Tests the bot', true)
+        .addField('!ping or /ping','Replies with "Pong"', true)
+        .addField('!c', 'Shows all commands', true)
+        .addField('!verifyme [Full Name]','Get verified on the server', true)
+        .addField('/ban or !ban [user] [reason]', 'Bans a user', true)
+        .addField('/kick or !kick [user] [reason]','Kicks a user', true)
+        .addField('/status or !status [status]','Sets the bot\'s status', true)
+        .addField('/resetsts or !resetsts','Resets the bot\'s status', true)
+        .addField('/send or !send [channel] [text]', 'Sends the provided text in the specified channel', true)
+        .addField('/addrole or !addrole [channel] [message ID] [role]', 'Adds the tagged role to the role menu', true)
+        .addField('!help','Displays the bot\'s help menu', true)
+        .addField('/command or !command ["enable" or "disable"] [command]', 'Enables or disables a command in a server', true)
+        .addField('/dm or !dm [user] [text]', 'Direct messages the specified user the provided text', true)
+        .addField('!purge [amount]', 'Deletes the specified ammount of messages from a channel', true)
+        .addField('!role add [user] [role]', 'Adds a role to a user', true)
+        .addField('!role remove [user] [role]', 'Removes a role from a user', true)
+        .addField('!role has [user] [role]', 'Checks if a user has a role', true)
+        .addField('/tmute or !tmute [user] [duration] [reason]', 'Temporarily mutes the specified user', true)
+        .addField('/tban or !tban [user] [duration] [reason]', 'Temporarily bans a user from the server', true)
+        .addField('/warn','Warns a user', true)
+        .addField('/clearwarn','Deletes the warning from the user', true)
+        .addField('/findwarn','Lists all the warnings for the specified user', true)
+        .addField('/edit or !edit [channel] [message ID] [new text]','Edits the bot\'s message', true)
+        .addField('/server or !server', 'Lists server information', true)
+        .addField('Find docs to the current version here:','https://tinyurl.com/plexbotv12docs')
 
         const newMessage = await message.reply({
             embeds: [embed]
