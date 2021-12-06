@@ -19,7 +19,6 @@ exports.default = {
     requireRoles: true,
     slash: true,
     guildOnly: true,
-    testOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <id>',
     expectedArgsTypes: ['USER', 'STRING'],
