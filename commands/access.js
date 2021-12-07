@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     category: 'Moderation',
     description: 'Grants a user access to a channel',
-    testOnly: true,
     slash: 'both',
     guildOnly: true,
     minArgs: 2,
