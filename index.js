@@ -26,7 +26,6 @@ const discord_js_1 = __importStar(require("discord.js"));
 const wokcommands_1 = __importDefault(require("wokcommands"));
 const path_1 = __importDefault(require("path"));
 require("dotenv/config");
-// import testSchema from './test-schema'
 const client = new discord_js_1.default.Client({
     // These intents are recommended for the built in help menu
     intents: [
@@ -49,7 +48,7 @@ client.on('ready', () => {
         // Allow importing of .ts files if you are using ts-node
         typeScript: false,
         // Specify which are the Test Servers
-        testServers: '900321207277195284',
+        testServers: '917598099952787526',
         // Specify which users are bot owners
         botOwners: '759374512256057344',
         // Pass in the new dbOptions
@@ -57,13 +56,8 @@ client.on('ready', () => {
         // Pass in your own mongo connection URI
         mongoUri: process.env.MONGODB
     });
-    // setTimeout(async () => {
-    //   await new testSchema({
-    //     message: 'hello world',
-    //   }).save()
-    // }, 1000)
 });
 process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);
 });
-client.login(process.env.TOKEN);
+client.login(process.env.TOKENTEST);
