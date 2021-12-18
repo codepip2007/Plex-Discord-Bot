@@ -4,8 +4,8 @@ exports.config = void 0;
 exports.default = (client) => {
     const statusOptions = [
         'Plex',
-        'Vote me on top.gg!',
         '!c for commands',
+        '/rpc to play "Rock, "Paper", "Scissors"'
     ];
     let counter = 0;
     const updateStatus = () => {

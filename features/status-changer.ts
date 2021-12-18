@@ -3,8 +3,8 @@ import { Client } from "discord.js";
 export default (client: Client) => {
     const statusOptions = [
         'Plex',
-        'Vote me on top.gg!',
         '!c for commands',
+        '/rpc to play "Rock, "Paper", "Scissors"'
     ]
     let counter = 0
 

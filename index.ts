@@ -2,7 +2,6 @@ import DiscordJS, { Intents } from 'discord.js'
 import WOKCommands from 'wokcommands'
 import path from 'path'
 import 'dotenv/config'
-import mongoose from 'mongoose'
 
 const client = new DiscordJS.Client({
   // These intents are recommended for the built in help menu
