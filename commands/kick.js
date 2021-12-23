@@ -13,37 +13,31 @@ exports.default = {
     category: 'Moderation',
     description: 'Kicks a user',
     permissions: ['ADMINISTRATOR'],
-    slash: 'both',
+    slash: true,
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
     callback: ({ message, interaction, args, guild }) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
-        const target = (message ? (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first() : interaction.options.getMember('user'));
-        const userDm = target.id;
+        const target = interaction.options.getMember('user');
         if (!target) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Please tag someone to kick',
                 ephemeral: true
-            };
+            });
         }
         if (!target.kickable) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Cannot kick that user',
                 ephemeral: true
-            };
+            });
         }
-        args.shift();
-        const reason = args.join(' ');
+        const reason = interaction.options.getString('reason');
         yield target.send(`**You have been kicked from the *${guild.name}* Discord server! Reason:** ${reason}`);
         target.kick(reason);
-        return {
-            custom: true,
+        interaction.reply({
             content: `You kicked <@${target.id}>`,
             ephemeral: true
-        };
+        });
     })
 };

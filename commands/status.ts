@@ -6,10 +6,10 @@ export default {
     minArgs: 1,
     expectedArgs: '<status>',
     expectedArgsTypes: ['STRING'],
-    slash: 'both',
+    slash: true,
     ownerOnly: true,
 
-    callback: ({ client, text }) => {
+    callback: ({ client, text, interaction }) => {
         client.user?.setPresence({
             status: 'online',
             activities: [
@@ -19,10 +19,9 @@ export default {
         ]
         })
 
-        return {
-            custom: true,
+        interaction.reply({
             content: 'Status updated',
             ephemeral: true,
-        }
+        })
     }
 } as ICommand

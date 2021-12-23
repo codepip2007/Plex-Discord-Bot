@@ -21,38 +21,24 @@ exports.default = {
     minArgs: 3,
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
-    slash: 'both',
+    slash: true,
     callback: ({ args, member: staff, guild, client, message, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
         if (!guild) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'You can only use this in a server',
                 ephemeral: true
-            };
+            });
         }
-        let userId = args.shift();
-        let duration = args.shift();
-        let reason = args.join(' ');
-        let user;
-        if (message) {
-            user = (_a = message.mentions.users) === null || _a === void 0 ? void 0 : _a.first();
-        }
-        else {
-            user = interaction.options.getUser('user');
-        }
+        let user = interaction.options.getUser('user');
+        let userId = user.id;
+        let duration = interaction.options.getString('duration');
+        let reason = interaction.options.getString('reason');
         if (!user) {
-            userId = userId.replace(/[<@!>]/g, '');
-            user = yield client.users.fetch(userId);
-            if (!user) {
-                return {
-                    custom: true,
-                    content: `Could not find a user with the ID "${userId}"`,
-                    ephemeral: true,
-                };
-            }
+            interaction.reply({
+                content: `Could not find a user <@${userId}>`,
+                ephemeral: true,
+            });
         }
-        userId = user.id;
         let time;
         let type;
         try {
@@ -61,11 +47,10 @@ exports.default = {
             type = split[1].toLowerCase();
         }
         catch (e) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: "Invalid time format! Example format: \"10d\" where 'd' = days, 'h' = hours and 'm' = minutes.",
-                ephemaral: true
-            };
+                ephemeral: true
+            });
         }
         if (type === 'h') {
             time *= 60;
@@ -74,11 +59,10 @@ exports.default = {
             time *= 60 * 24;
         }
         else if (type !== 'm') {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Please use "m", "h", or "d" for minutes, hours, and days respectively.',
                 ephemeral: true,
-            };
+            });
         }
         const expires = new Date();
         expires.setMinutes(expires.getMinutes() + time);
@@ -88,22 +72,20 @@ exports.default = {
             type: 'tempMute'
         });
         if (result) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: `<@${userId}> is already muted in this server.`,
                 ephemeral: true
-            };
+            });
         }
         try {
             const member = yield guild.members.fetch(userId);
             if (member) {
                 const muteRole = guild.roles.cache.find((role) => role.name === 'Muted');
                 if (!muteRole) {
-                    return {
-                        custom: true,
-                        cotent: 'This server does not have a "Muted" role',
+                    interaction.reply({
+                        content: 'This server does not have a "Muted" role',
                         ephemeral: true
-                    };
+                    });
                 }
                 member.roles.add(muteRole);
             }
@@ -117,17 +99,15 @@ exports.default = {
             }).save();
         }
         catch (ignored) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Cannot mute that user',
                 ephemeral: true
-            };
+            });
         }
         user.send(`**You have been temporarily muted in the *${guild.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`);
-        return {
-            custom: true,
+        interaction.reply({
             content: `<@${userId}> has been muted for "${duration}"`,
             ephemeral: true
-        };
+        });
     })
 };

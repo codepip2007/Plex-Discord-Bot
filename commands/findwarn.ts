@@ -33,6 +33,5 @@ export default {
         let embed = new MessageEmbed().setDescription(description)
 
         return embed
-
     }
 } as ICommand

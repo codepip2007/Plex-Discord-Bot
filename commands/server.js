@@ -5,12 +5,11 @@ exports.default = {
     description: 'Gets information about the server',
     slash: true,
     guildOnly: true,
-    callback: ({ message, guild }) => {
+    callback: ({ interaction, guild }) => {
         // let { name, memberCount } = guild!
-        return {
-            custom: true,
+        interaction.reply({
             content: `**Server Name:** ${guild.name}\n**Members:** ${guild.memberCount}`,
             ephemeral: true
-        };
+        });
     }
 };

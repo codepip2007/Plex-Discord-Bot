@@ -13,33 +13,17 @@ exports.default = {
     category: 'Moderation',
     description: 'Sends a DM to a user1',
     permissions: ['MANAGE_CHANNELS'],
-    slash: 'both',
+    slash: true,
     minArgs: 2,
     expectedArgs: '<user> <message>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, interaction, args, guild }) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
-        let user;
-        if (message) {
-            user = (_a = message.mentions.users) === null || _a === void 0 ? void 0 : _a.first();
-        }
-        else {
-            user = interaction.options.getUser('user');
-        }
-        if (!user) {
-            return {
-                custom: true,
-                content: 'Please provide someone to DM',
-                ephemeral: true
-            };
-        }
-        args.shift();
-        const text = args.join(' ');
+    callback: ({ interaction, guild }) => __awaiter(void 0, void 0, void 0, function* () {
+        let user = interaction.options.getUser('user');
+        const text = interaction.options.getString('message');
         user.send(`**Message from a moderator in the *${guild.name}* Discord server:** ${text}`);
-        return {
-            custom: true,
+        interaction.reply({
             content: `Message sent to ${user}`,
             ephemeral: true
-        };
+        });
     })
 };

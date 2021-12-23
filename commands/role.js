@@ -9,44 +9,115 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const actions = ['add', 'remove', 'has'];
 exports.default = {
     category: 'Configuration',
     description: 'Gives a role to a user',
     permissions: ['MANAGE_ROLES'],
-    minArgs: 3,
-    expectedArgs: `<"${actions.join('", "')}"> <user @> <role @>"`,
-    expectedArgsTypes: ['STRING', 'USER', 'ROLE'],
-    slash: false,
+    slash: true,
     guildOnly: true,
-    callback: ({ guild, args }) => __awaiter(void 0, void 0, void 0, function* () {
-        const action = args.shift();
-        if (!action || !actions.includes(action)) {
-            return `Unknown action! Please use one of the follwoing: ${actions.join(', ')}`;
+    options: [
+        {
+            type: 'SUB_COMMAND',
+            name: 'add',
+            description: 'Adds a role to the user',
+            options: [
+                {
+                    name: 'user',
+                    type: 'USER',
+                    description: 'The user to add the role to',
+                    required: true
+                },
+                {
+                    name: 'role',
+                    type: 'ROLE',
+                    description: 'The role to add to the user',
+                    required: true
+                },
+            ],
+        },
+        {
+            type: 'SUB_COMMAND',
+            name: 'remove',
+            description: 'Removes a role from the user',
+            options: [
+                {
+                    name: 'user',
+                    type: 'USER',
+                    description: 'The user to remove the role from',
+                    required: true
+                },
+                {
+                    name: 'role',
+                    type: 'ROLE',
+                    description: 'The role to remove from the user',
+                    required: true
+                },
+            ]
+        },
+        {
+            type: 'SUB_COMMAND',
+            name: 'has',
+            description: 'Checks if the user has the role',
+            options: [
+                {
+                    name: 'user',
+                    type: 'USER',
+                    description: 'The user to evaluate',
+                    required: true
+                },
+                {
+                    name: 'role',
+                    type: 'ROLE',
+                    description: 'The role to check',
+                    required: true
+                },
+            ]
         }
-        const memberId = args.shift().replace(/[<@!&>]/g, '');
-        const roleId = args.shift().replace(/[<@!&>]/g, '');
-        const member = guild.members.cache.get(memberId);
-        const role = guild.roles.cache.get(roleId);
-        if (!member) {
-            return `Could not find member with ID ${memberId}`;
+    ],
+    callback: ({ guild, args, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
+        let action = interaction.options.getSubcommand();
+        const targetMember = interaction.options.getMember('user');
+        const role = interaction.options.getRole('role');
+        let memberId = targetMember === null || targetMember === void 0 ? void 0 : targetMember.id;
+        let roleId = role.id;
+        if (!targetMember) {
+            return `Could not find member <@${memberId}>`;
         }
         if (!role) {
-            return `Could not find role with ID ${roleId}`;
+            return `Could not find role <@&${roleId}>`;
         }
         if (action === 'has') {
-            return member.roles.cache.has(roleId)
-                ? 'User has role'
-                : 'User does not have role';
+            let result = targetMember.roles.cache.has(roleId);
+            if (result) {
+                interaction.reply({
+                    content: `<@${memberId}> has <@&${roleId}>`,
+                    ephemeral: true
+                });
+            }
+            else {
+                interaction.reply({
+                    content: `<@${memberId}> does not have <@&${roleId}>`,
+                    ephemeral: true
+                });
+            }
         }
         if (action === 'add') {
-            member.roles.add(role);
-            return 'Role given';
+            targetMember.roles.add(roleId);
+            interaction.reply({
+                content: `Added <@&${roleId}> to <@${memberId}>`,
+                ephemeral: true
+            });
         }
         if (action === 'remove') {
-            member.roles.remove(role);
-            return 'Role removed';
+            targetMember.roles.remove(roleId);
+            interaction.reply({
+                content: `Removed <@&${roleId}> from <@${memberId}>`,
+                ephemeral: true
+            });
         }
-        return 'Unknown action';
+        interaction.reply({
+            content: `Unknown role command! Please use "has", "remove", or "add"`,
+            ephemeral: true
+        });
     })
 };

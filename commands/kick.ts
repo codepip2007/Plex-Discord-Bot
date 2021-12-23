@@ -5,39 +5,34 @@ export default {
     category: 'Moderation',
     description: 'Kicks a user',
     permissions: ['ADMINISTRATOR'],
-    slash: 'both',
+    slash: true,
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
     callback: async ({ message, interaction, args, guild }) => {
-        const target = (message ? message.mentions.members?.first() : interaction.options.getMember('user') as GuildMember)
-        const userDm = target!.id
+        const target = interaction.options.getMember('user') as GuildMember
         if (!target) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Please tag someone to kick',
                 ephemeral: true
-            }
+            })
         }
         if (!target.kickable) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Cannot kick that user',
                 ephemeral: true
-            }
+            })
         }
-        args.shift()
-        const reason = args.join(' ')
+        const reason = interaction.options.getString('reason')!
 
         await target.send(`**You have been kicked from the *${guild!.name}* Discord server! Reason:** ${reason}`)
 
         target.kick(reason)
-        return {
-            custom: true,
+        interaction.reply({
             content: `You kicked <@${target.id}>`,
             ephemeral: true
-        }
+        })
     }
 } as ICommand

@@ -26,6 +26,5 @@ export default {
             },
             ephemeral: true
         }
-
     }
 } as ICommand

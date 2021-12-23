@@ -13,17 +13,19 @@ exports.default = {
     category: 'Moderation',
     description: 'Deletes multiple messages',
     permissions: ['MANAGE_MESSAGES'],
-    maxArgs: 1,
-    expectedArgs: '<ammount>',
-    callback: ({ message, channel, args }) => __awaiter(void 0, void 0, void 0, function* () {
-        const amount = args.length ? parseInt(args.shift()) : 1;
-        if (message) {
-            yield message.delete();
+    minArgs: 1,
+    slash: true,
+    expectedArgs: '<amount>',
+    expectedArgsTypes: ['NUMBER'],
+    callback: ({ message, channel, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
+        const amount = interaction.options.getNumber('amount');
+        if (!amount) {
+            interaction.reply({
+                content: 'Please specify an amount of messages to delete!',
+                ephemeral: true
+            });
         }
-        // const { size } = await channel.bulkDelete(amount, true)
-        const messages = yield channel.messages.fetch({ limit: amount });
-        const { size } = messages;
-        messages.forEach((message) => message.delete());
+        const { size } = yield channel.bulkDelete(amount, true);
         if (amount === 1) {
             message.channel.send(`Deleted ${size} message.`);
         }

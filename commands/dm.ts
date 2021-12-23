@@ -5,34 +5,21 @@ export default {
     category: 'Moderation',
     description: 'Sends a DM to a user1',
     permissions: ['MANAGE_CHANNELS'],
-    slash: 'both',
+    slash: true,
     minArgs: 2,
     expectedArgs: '<user> <message>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: async ({ message, interaction, args, guild }) => {
-        let user: User | undefined
-        if (message) {
-            user = message.mentions.users?.first()
-        } else {
-            user = interaction.options.getUser('user') as User
-        }
-        if (!user) {
-            return {
-                custom: true,
-                content: 'Please provide someone to DM',
-                ephemeral: true
-            }
-        }
+    callback: async ({ interaction, guild }) => {
+        let user = interaction.options.getUser('user')
+        const text = interaction.options.getString('message')
 
-        args.shift()
-        const text = args.join(' ')
-        user.send(`**Message from a moderator in the *${guild!.name}* Discord server:** ${text}`)
-        return {
-            custom: true,
+        user!.send(`**Message from a moderator in the *${guild!.name}* Discord server:** ${text}`)
+        
+        interaction.reply({
             content: `Message sent to ${user}`,
             ephemeral: true
-        }
+        })
 
     }
 } as ICommand

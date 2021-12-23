@@ -40,7 +40,7 @@ export default {
             components: [row],
             ephemeral: true
         })
-
+        
         collector.on('end', async (collection) => {
             if (collection.first()?.customId === 'rock' || botChoice === 'Rock') {
                 interaction.editReply({

@@ -4,14 +4,13 @@ export default {
     category: 'testing',
     description: 'Replies with pong',
 
-    slash: 'both',
+    slash: true,
 
-    callback: ({}) => {
-        return {
-            custom: true,
-            content: 'Pong',
+    callback: ({ interaction }) => {
+        interaction.reply({
+            content: 'Pong!',
             ephemeral: true
-        }
+        })
     }
 } as ICommand
 

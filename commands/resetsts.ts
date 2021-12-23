@@ -4,14 +4,13 @@ export default {
     category: 'Configuration',
     description: 'Reset the bot\'s status',
     ownerOnly: true,
-    slash: 'both',
+    slash: true,
 
-    callback: ({ client, text }) => {
+    callback: ({ client, interaction }) => {
         client.user!.setActivity()
-        return {
-            custom: true,
+        interaction.reply({
             content: 'Bot\'s status has been reset',
             ephemeral: true
-        }
+        })
     }
 } as ICommand

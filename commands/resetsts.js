@@ -4,13 +4,12 @@ exports.default = {
     category: 'Configuration',
     description: 'Reset the bot\'s status',
     ownerOnly: true,
-    slash: 'both',
-    callback: ({ client, text }) => {
+    slash: true,
+    callback: ({ client, interaction }) => {
         client.user.setActivity();
-        return {
-            custom: true,
+        interaction.reply({
             content: 'Bot\'s status has been reset',
             ephemeral: true
-        };
+        });
     }
 };

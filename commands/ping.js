@@ -3,13 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     category: 'testing',
     description: 'Replies with pong',
-    slash: 'both',
-    callback: ({}) => {
-        return {
-            custom: true,
-            content: 'Pong',
+    slash: true,
+    callback: ({ interaction }) => {
+        interaction.reply({
+            content: 'Pong!',
             ephemeral: true
-        };
+        });
     }
 };
 //works with both /ping and !ping

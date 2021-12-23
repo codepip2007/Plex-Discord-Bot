@@ -10,7 +10,7 @@ export default {
     minArgs: 3,
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
-    slash: 'both',
+    slash: true,
 
     callback: async ({ 
         args,
@@ -21,51 +21,35 @@ export default {
         interaction
     }) => {
         if (!guild) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'You can only use this in a server',
                 ephemeral: true
-            }
+            })
         }
 
-        let userId = args.shift()!
-        let duration = args.shift()!
-        let reason = args.join(' ')
-        let user: User | undefined
-
-        if (message) {
-            user = message.mentions.users?.first()
-        } else {
-            user = interaction.options.getUser('user') as User
-        }
-
-        if (!user) {
-            userId = userId.replace(/[<@!>]/g, '')
-            user = await client.users.fetch(userId)
+        let user = interaction.options.getUser('user') as User
+        let userId = user.id
+        let duration = interaction.options.getString('duration')
+        let reason = interaction.options.getString('reason')!
 
             if (!user) {
-                return {
-                    custom: true,
-                    content: `Could not find a user with the ID "${userId}"`,
+                interaction.reply({
+                    content: `Could not find <@${userId}>`,
                     ephemeral: true
-                }
+                })
             }
-        }
-
-        userId = user.id
 
         let time
         let type
         try {
-            const split = duration.match(/\d+|\D+/g)
+            const split = duration!.match(/\d+|\D+/g)
             time = parseInt(split![0])
             type = split![1].toLowerCase()
         } catch (e) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: "Invalid time format! Example format: \"10d\" where 'd' = days, 'h' = hours and 'm' = minutes.",
-                ephemaral: true
-            }
+                ephemeral: true
+            })
         }
 
         if (type === 'h') {
@@ -73,56 +57,52 @@ export default {
         } else if (type === 'd') {
             time *= 60 * 24
         } else if (type !== 'm') {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Please use "m", "h", or "d" for minutes, hours, and days respectively.',
                 ephemeral: true,
-            }
+            })
         }
 
         const expires = new Date()
         expires.setMinutes(expires.getMinutes() + time)
 
         let result = await punishmentSchema.findOne({
-            guildId: guild.id,
+            guildId: guild!.id,
             userId,
             type: 'tempBan'
         })
 
         if (result) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: `<@${userId}> is already banned in this server.`,
                 ephemeral: true
-            }
+            })
         }
 
         try {
-            await guild.members.ban(userId, { days: 7, reason })
+            await guild!.members.ban(userId, { days: 7, reason })
 
             await new punishmentSchema({
                 userId,
-                guildId: guild.id,
+                guildId: guild!.id,
                 staffId: staff.id,
                 reason,
                 expires,
                 type: 'tempBan'
             }).save()
         } catch (ignored) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Cannot ban that user',
                 ephemeral: true
-            }
+            })
         }
 
-        user!.send(`**You have been temporarily banned in the *${guild!.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`)
+        user!.send(`**You have been temporarily banned from the *${guild!.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`)
 
-        return {
-            custom: true,
+        interaction.reply({
             content: `<@${userId}> has been banned for "${duration}"`,
             ephemeral: true
-        }
+        })
 
 
     }

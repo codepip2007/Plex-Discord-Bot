@@ -13,40 +13,35 @@ exports.default = {
     category: 'Moderation',
     description: 'Bans a user',
     permissions: ['ADMINISTRATOR'],
-    slash: 'both',
+    slash: true,
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
     callback: ({ message, interaction, args, guild }) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
-        const target = (message ? (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first() : interaction.options.getMember('user'));
+        const target = interaction.options.getMember('user');
         const userDm = target.id;
         if (!target) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Please tag someone to ban',
                 ephemeral: true,
-            };
+            });
         }
         if (!target.bannable) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Cannot ban that user',
                 ephemeral: true
-            };
+            });
         }
-        args.shift();
-        const reason = args.join(' ');
+        const reason = interaction.options.getString('reason');
         target.send(`**You have been banned from the *${guild.name}* Discord Server! Reason:** ${reason}`);
         yield target.ban({
             reason,
             days: 7
         });
-        return {
-            custom: true,
+        interaction.reply({
             content: `You banned <@${target.id}>`,
             ephemeral: true,
-        };
+        });
     })
 };

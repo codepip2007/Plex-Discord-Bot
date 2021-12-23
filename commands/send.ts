@@ -5,23 +5,21 @@ export default {
     category: 'Configuration',
     description: 'Sends a message',
     permissions: ['ADMINISTRATOR'],
-    minArgs: 1,
+    minArgs: 2,
     expectedArgs: '<channel> <text>',
     expectedArgsTypes: ['CHANNEL', 'STRING'],
-    slash: 'both',
+    slash: true,
     guildOnly: true,
     callback: ({ message, interaction, args }) => {
-        const channel = (message ? message.mentions.channels.first() : interaction.options.getChannel('channel')) as TextChannel
+        const channel = interaction.options.getChannel('channel') as TextChannel
         if(!channel || channel.type !== 'GUILD_TEXT') {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Please tag a text channel',
                 ephemeral: true
-            }
+            })
         }
 
-        args.shift() // Removes the channel from the arguments array
-        const text = args.join(' ') // Changes ['hello', 'world'] into 'hello world'
+        let text = interaction.options.getString('text')!
 
         channel.send(text)
 

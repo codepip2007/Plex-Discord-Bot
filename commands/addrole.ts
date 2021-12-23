@@ -10,7 +10,7 @@ export default {
     expectedArgs: '<channel> <messageId> <role>',
     expectedArgsTypes: ['CHANNEL', 'STRING', 'ROLE'],
 
-    slash: 'both',
+    slash: true,
     guildOnly: true,
 
     init: (client: Client) => {
@@ -44,24 +44,22 @@ export default {
     },
 
     callback: async ({ message, interaction, args }) => {
-        const channel = (message ? message.mentions.channels.first() : interaction.options.getChannel('channel')) as TextChannel
+        const channel = interaction.options.getChannel('channel') as TextChannel
         if(!channel || channel.type !== 'GUILD_TEXT') {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Please tag a text channel',
                 ephemeral: true
-            }
+            })
         }
 
         const messageId = args[1]
 
-        const role = (message ? message.mentions.roles.first() : interaction.options.getRole('role')) as Role
+        const role = interaction.options.getRole('role') as Role
         if (!role) {
-            return {
-                custom: true,
+            interaction.reply({
                 content:'Unknown role!',
                 ephemeral: true,
-            }
+            })
         }
 
         const targetMessage = await channel.messages.fetch(messageId, {
@@ -70,19 +68,17 @@ export default {
         })
 
         if(!targetMessage) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: 'Unknow message ID',
                 ephemeral: true,
-            }
+            })
         }
         const bot = '912138759229833226'
         if (targetMessage.author.id !== bot) {
-            return {
-                custom: true,
+            interaction.reply({
                 content: `Please provide a message ID that was sent from <${bot}>`,
                 ephemeral: true,
-            }
+            })
         }
 
         let row = targetMessage.components[0] as MessageActionRow 
@@ -99,14 +95,13 @@ export default {
         if (menu) {
             for (const o of menu.options) {
                 if (o.value === option[0].value) {
-                    return {
-                        custom: true,
+                    interaction.reply({
                         content: `<@&${o.value}> is already part of this menu`,
                         allowedMentions: {
                             roles: []
                         },
                         ephemeral: true,
-                    }
+                    })
                 }
             }
             menu.addOptions(option)
@@ -126,14 +121,13 @@ export default {
             components: [row]
         })
 
-        return {
-            custom: true,
+        interaction.reply({
             content: `Added <@&${role.id}> to the auto roles menu`,
             allowedMentions: {
                 roles: []
             },
             ephemeral: true,
-        }
+        })
     }
     
 } as ICommand

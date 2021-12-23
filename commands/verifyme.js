@@ -12,50 +12,42 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     category: 'Verification',
     description: 'Get verified on the server',
-    slash: false,
+    slash: true,
     guildOnly: true,
-    minArgs: 1,
-    expectedArgs: '<Full Name>',
-    expectedArgsTypes: [],
-    callback: ({ message, args }) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a, _b;
-        const name = message.content.replace('!verifyme', '');
-        if (!name) {
-            return {
-                custom: true,
-                content: 'Please provide your full name! Example: "!verify John Doe"',
-                ephemeral: true
-            };
-        }
-        else {
-            const verConfirm = `**Full Name:** ${name}\n**Discord Username:** ${message.author.tag}\n**Tag:** <@${message.author.id}>`;
-            const msg = yield message.channel.send(verConfirm);
-            const memberNick = message.author.id;
-            if (!message.guild.me.permissions.has('MANAGE_NICKNAMES')) {
-                return message.channel.send('I don\'t have permission to change your nickname!');
-            }
-            else {
-                message.member.setNickname(message.content.replace('!verifyme ', ''));
-            }
-            const member = message.author;
-            if (!((_b = (_a = message.guild) === null || _a === void 0 ? void 0 : _a.me) === null || _b === void 0 ? void 0 : _b.permissions.has('MANAGE_ROLES'))) {
-                return message.channel.send('I don\'t have permisssion to assign you a role');
-            }
-            else {
-                message.member.roles.add('874996734189772871');
-                message.member.roles.remove('874997865825587260');
-            }
-            setTimeout(() => {
-                msg.edit('Assigning roles');
-            }, 300);
-            setTimeout(() => {
-                msg.edit('Changing nickname');
-            }, 500);
-            setTimeout(() => {
-                msg.edit(`<@${message.author.id}> Verification process complete. Welcome to the server!`);
-            }, 1000);
-            let newMemberChannel = message.guild.channels.cache.get('875229171872305223');
-            newMemberChannel.send(verConfirm);
-        }
+    minArgs: 2,
+    expectedArgs: '<First Name> <Last Name>',
+    expectedArgsTypes: ['STRING', 'STRING'],
+    callback: ({ message, interaction, guild, user, member }) => __awaiter(void 0, void 0, void 0, function* () {
+        let firstname = interaction.options.getString('First Name');
+        let lastname = interaction.options.getString('Last Name');
+        const verConfirm = `**Full Name:** ${firstname} ${lastname}\n**Discord Username:** ${user.tag}\n**Tag:** <@${member.id}>`;
+        interaction.reply({
+            content: verConfirm,
+            ephemeral: true
+        });
+        member.setNickname(`${firstname} ${lastname}`);
+        const role = guild.roles.cache.find((role) => role.name === 'Verified');
+        let roleId = role.id;
+        member.roles.add(role);
+        setTimeout(() => {
+            interaction.editReply({
+                content: 'Assigning roles',
+            });
+        }, 300);
+        setTimeout(() => {
+            interaction.editReply({
+                content: 'Changing name'
+            });
+        }, 500);
+        setTimeout(() => {
+            interaction.editReply({
+                content: `<@${member.id}> Verification process complete. Welcome to the server!`
+            });
+        }, 1000);
+        setTimeout(() => {
+            member.roles.add(role);
+        }, 1500);
+        let channel = guild === null || guild === void 0 ? void 0 : guild.channels.cache.find((channel) => channel.name === 'Members');
+        channel.send(verConfirm);
     })
 };
