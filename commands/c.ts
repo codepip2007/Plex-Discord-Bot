@@ -41,7 +41,7 @@ export default {
         .addField('/access', 'Gives a user access to a channel', true)
         .addField('/remaccess', 'Removes a user\'s access from a channel', true)
         .addField('/rpc', 'Plays rock, paper, scissors with the bot', true)
-        .addField('Find docs to the current version here:','https://tinyurl.com/plexbotv12docs')
+        .addField('Find docs to the current version here:','https://tinyurl.com/plexv14docs')
 
         const newMessage = await interaction.reply({
             embeds: [embed]
