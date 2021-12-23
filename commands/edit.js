@@ -17,7 +17,6 @@ exports.default = {
     minArgs: 3,
     expectedArgs: '<channel> <messageid> <text>',
     expectedArgsTypes: ['CHANNEL', 'STRING', 'STRING'],
-    testOnly: true,
     callback: ({ message, interaction, args }) => __awaiter(void 0, void 0, void 0, function* () {
         const channel = interaction.options.getChannel('channel');
         if (!channel || channel.type !== 'GUILD_TEXT') {

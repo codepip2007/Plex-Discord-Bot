@@ -9,7 +9,6 @@ export default {
     minArgs: 3,
     expectedArgs: '<channel> <messageid> <text>',
     expectedArgsTypes: ['CHANNEL', 'STRING', 'STRING'],
-    testOnly: true,
 
     callback: async ({ message, interaction, args }) => {
         const channel = interaction.options.getChannel('channel') as TextChannel
