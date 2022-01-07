@@ -12,7 +12,6 @@ const client = new DiscordJS.Client({
   ],
 })
 client.on('ready', () => {
-    console.log('The bot is ready!')
   const dbOptions = {
     // These are the default values
     keepAlive: true
@@ -33,15 +32,37 @@ client.on('ready', () => {
     // Pass in your own mongo connection URI
     mongoUri: process.env.MONGODB
   })
-
     .setDisplayName("Plex Discord Bot")
-    .setCategoryEmoji('Moderation','🔨')
-    .setCategoryEmoji('Configuration','⚙')
-    .setCategoryEmoji('Messages','📩')
-    .setCategoryEmoji('Testing','🧪')
-    .setCategoryEmoji('Commands','🛠')
-    .setCategoryEmoji('Games','🎮')
-    .setCategoryEmoji('Verification','✔')
+    .setCategorySettings([
+      {
+          name: 'Games',
+          emoji: '🎮'
+      },
+      {
+        name: 'Moderation',
+        emoji: '🔨'
+      },
+      {
+        name: 'Configuration',
+        emoji: '⚙'
+      },
+      {
+        name: 'Messages',
+        emoji: '📩'
+      },
+      {
+        name: 'Testing',
+        emoji: '🧪'
+      },
+      {
+        name: 'Commands',
+        emoji: '🛠'
+      },
+      {
+        name: 'Verification',
+        emoji: '✔'
+      }
+    ])
   
  });
   process.on('unhandledRejection', error => {
