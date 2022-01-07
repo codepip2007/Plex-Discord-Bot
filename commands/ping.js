@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
-    category: 'testing',
+    category: 'Testing',
     description: 'Replies with pong',
     slash: true,
     callback: ({ interaction }) => {

@@ -2,7 +2,7 @@ import { TextChannel } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
-    category: 'Configuration',
+    category: 'Messages',
     description: 'Sends a message',
     permissions: ['ADMINISTRATOR'],
     minArgs: 2,

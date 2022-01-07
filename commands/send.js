@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
-    category: 'Configuration',
+    category: 'Messages',
     description: 'Sends a message',
     permissions: ['ADMINISTRATOR'],
     minArgs: 2,

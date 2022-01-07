@@ -1,7 +1,7 @@
 import { ICommand } from 'wokcommands';
 
 export default {
-    category: 'testing',
+    category: 'Testing',
     description: 'Replies with pong',
 
     slash: true,

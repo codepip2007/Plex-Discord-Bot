@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 exports.default = {
     category: 'Testing',
-    description: 'testing',
+    description: 'Test to bot',
     slash: true,
     callback: ({ interaction: msgInt, channel }) => __awaiter(void 0, void 0, void 0, function* () {
         const row = new discord_js_1.MessageActionRow()

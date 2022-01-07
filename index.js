@@ -55,7 +55,15 @@ client.on('ready', () => {
         dbOptions,
         // Pass in your own mongo connection URI
         mongoUri: process.env.MONGODB
-    });
+    })
+        .setDisplayName("Plex Discord Bot")
+        .setCategoryEmoji('Moderation', '🔨')
+        .setCategoryEmoji('Configuration', '⚙')
+        .setCategoryEmoji('Messages', '📩')
+        .setCategoryEmoji('Testing', '🧪')
+        .setCategoryEmoji('Commands', '🛠')
+        .setCategoryEmoji('Games', '🎮')
+        .setCategoryEmoji('Verification', '✔');
 });
 process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);

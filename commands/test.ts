@@ -3,7 +3,7 @@ import { ICommand } from 'wokcommands';
 
 export default {
     category: 'Testing',
-    description: 'testing',
+    description: 'Test to bot',
     slash: true,
 
     callback: async ({ interaction: msgInt, channel }) => {

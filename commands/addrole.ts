@@ -2,7 +2,7 @@ import DiscordJS, { Client, GuildMember, Message, MessageActionRow, MessageSelec
 import { ICommand } from "wokcommands";
 
 export default {
-    category: 'Configuraton',
+    category: 'Configuration',
     description: 'Adds a role to the auto role message',
     permissions: ['ADMINISTRATOR'],
     minArgs: 3,

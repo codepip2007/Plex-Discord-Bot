@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 exports.default = {
-    category: 'Configuraton',
+    category: 'Configuration',
     description: 'Adds a role to the auto role message',
     permissions: ['ADMINISTRATOR'],
     minArgs: 3,
