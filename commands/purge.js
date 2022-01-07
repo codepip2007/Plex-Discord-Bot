@@ -25,12 +25,25 @@ exports.default = {
                 ephemeral: true
             });
         }
+        yield interaction.reply({
+            content: `Deleting ${amount} message(s)...`,
+            ephemeral: true
+        });
         const { size } = yield channel.bulkDelete(amount, true);
         if (amount === 1) {
-            message.channel.send(`Deleted ${size} message.`);
+            yield interaction.editReply({
+                content: `Deleted ${size} message.`,
+            });
         }
         if (amount > 1) {
-            message.channel.send(`Deleted ${size} messages.`);
+            yield interaction.editReply({
+                content: `Deleted ${size} messages.`,
+            });
+        }
+        if (amount > 100) {
+            yield interaction.editReply({
+                content: `Please provide an amount not greater than 100!`,
+            });
         }
     })
 };

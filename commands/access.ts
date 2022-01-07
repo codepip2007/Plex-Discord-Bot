@@ -4,8 +4,8 @@ import { ICommand } from 'wokcommands'
 export default {
     category: 'Moderation',
     description: 'Grants a user access to a channel',
-    slash: true,
-    guildOnly: true,
+    slash: true, // Only a slash command
+    guildOnly: true, // Only used in guilds
     minArgs: 2,
     expectedArgs: '<user> <channel>',
     expectedArgsTypes: ['USER', 'CHANNEL'],
@@ -30,7 +30,7 @@ export default {
         }
 
        if (targetChannel!.isText()) {
-           targetChannel!.permissionOverwrites!.create(targetUserId!, {
+           targetChannel!.permissionOverwrites!.create(targetUserId!, { // Creates permissions
                VIEW_CHANNEL: true,
                CONNECT: true
            })

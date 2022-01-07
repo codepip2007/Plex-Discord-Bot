@@ -28,3 +28,4 @@ test        |   Gives a test menu
 tmute       |   Temporarily mutes a user
 verifyme    |   Changes your nickname, and assigns the 'Verified' role
 warn        |   Warns a user
+roast       |   Roasts the mentioned user

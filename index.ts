@@ -39,5 +39,6 @@ client.on('ready', () => {
     console.error('Unhandled promise rejection:', error);
   });
 
+  // Login to the client
 client.login(process.env.TOKENTEST)
 

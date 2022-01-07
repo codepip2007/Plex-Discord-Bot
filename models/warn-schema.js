@@ -28,9 +28,9 @@ let schema = new mongoose_1.Schema({
     userId: req,
     guildId: req,
     reason: req,
-    staffId: req,
+    staffId: req, // The moderator/staff member who warned the user
 }, {
-    timestamps: true,
+    timestamps: true, // Include timestamps
 });
-let name = 'warns';
+let name = 'warns'; // Name of the database
 exports.default = mongoose_1.default.models[name] || mongoose_1.default.model(name, schema);

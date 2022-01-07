@@ -19,13 +19,28 @@ export default {
             })
         }
 
+        await interaction.reply({
+            content: `Deleting ${amount} message(s)...`,
+            ephemeral: true
+        })
+
         const { size } = await channel.bulkDelete(amount, true)
 
         if (amount === 1) {
-            message.channel.send(`Deleted ${size} message.`)
+            await interaction.editReply({
+                content: `Deleted ${size} message.`,
+            })
         }
         if (amount > 1) {
-            message.channel.send(`Deleted ${size} messages.`)
+            await interaction.editReply({
+                content: `Deleted ${size} messages.`,
+            })
+        }
+
+        if (amount > 100) {
+            await interaction.editReply({
+                content: `Please provide an amount not greater than 100!`,
+            })
         }
     }
 } as ICommand

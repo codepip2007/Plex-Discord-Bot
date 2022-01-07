@@ -41,55 +41,55 @@ exports.default = {
         });
         collector.on('end', (collection) => __awaiter(void 0, void 0, void 0, function* () {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j;
-            if (((_a = collection.first()) === null || _a === void 0 ? void 0 : _a.customId) === 'rock' || botChoice === 'Rock') {
+            if (((_a = collection.first()) === null || _a === void 0 ? void 0 : _a.customId) === 'rock' && botChoice === 'Rock') {
                 interaction.editReply({
                     content: `I chose "Rock" as well. It's a draw!`,
                     components: [],
                 });
             }
-            else if (((_b = collection.first()) === null || _b === void 0 ? void 0 : _b.customId) === 'rock' || botChoice === 'Paper') {
+            else if (((_b = collection.first()) === null || _b === void 0 ? void 0 : _b.customId) === 'rock' && botChoice === 'Paper') {
                 interaction.editReply({
                     content: `I chose "Paper". You win!`,
                     components: []
                 });
             }
-            else if (((_c = collection.first()) === null || _c === void 0 ? void 0 : _c.customId) === 'rock' || botChoice === 'Scissors') {
+            else if (((_c = collection.first()) === null || _c === void 0 ? void 0 : _c.customId) === 'rock' && botChoice === 'Scissors') {
                 interaction.editReply({
                     content: `I chose "Scissors". You win!`,
                     components: []
                 });
             }
-            else if (((_d = collection.first()) === null || _d === void 0 ? void 0 : _d.customId) === 'paper' || botChoice === 'Rock') {
+            else if (((_d = collection.first()) === null || _d === void 0 ? void 0 : _d.customId) === 'paper' && botChoice === 'Rock') {
                 interaction.editReply({
                     content: `I chose "Paper". You win!`,
                     components: []
                 });
             }
-            else if (((_e = collection.first()) === null || _e === void 0 ? void 0 : _e.customId) === 'paper' || botChoice === 'Paper') {
+            else if (((_e = collection.first()) === null || _e === void 0 ? void 0 : _e.customId) === 'paper' && botChoice === 'Paper') {
                 interaction.editReply({
                     content: `I also chose "Paper". It's a draw!`,
                     components: []
                 });
             }
-            else if (((_f = collection.first()) === null || _f === void 0 ? void 0 : _f.customId) === 'paper' || botChoice === 'Scissors') {
+            else if (((_f = collection.first()) === null || _f === void 0 ? void 0 : _f.customId) === 'paper' && botChoice === 'Scissors') {
                 interaction.editReply({
                     content: `I chose "Scissors". You lose!`,
                     components: []
                 });
             }
-            else if (((_g = collection.first()) === null || _g === void 0 ? void 0 : _g.customId) === 'scissors' || botChoice === 'Rock') {
+            else if (((_g = collection.first()) === null || _g === void 0 ? void 0 : _g.customId) === 'scissors' && botChoice === 'Rock') {
                 interaction.editReply({
                     content: `I chose "Rock". You lose!`,
                     components: []
                 });
             }
-            else if (((_h = collection.first()) === null || _h === void 0 ? void 0 : _h.customId) === 'scissors' || botChoice === 'Paper') {
+            else if (((_h = collection.first()) === null || _h === void 0 ? void 0 : _h.customId) === 'scissors' && botChoice === 'Paper') {
                 interaction.editReply({
                     content: `I chose "Paper". You win!`,
                     components: []
                 });
             }
-            else if (((_j = collection.first()) === null || _j === void 0 ? void 0 : _j.customId) === 'scissors' || botChoice === 'Scissors') {
+            else if (((_j = collection.first()) === null || _j === void 0 ? void 0 : _j.customId) === 'scissors' && botChoice === 'Scissors') {
                 interaction.editReply({
                     content: `I chose "Scissors". It's a draw!`,
                     components: []
