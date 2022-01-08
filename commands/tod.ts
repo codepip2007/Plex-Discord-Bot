@@ -11,8 +11,6 @@ export default {
     slash: true,
     guildOnly: true,
 
-    testOnly: true,
-
     callback: async ({ interaction, member, channel, message }) => {
         let target = interaction.options.getUser('target')
 

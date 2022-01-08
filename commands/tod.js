@@ -18,7 +18,6 @@ exports.default = {
     expectedArgsTypes: ['USER'],
     slash: true,
     guildOnly: true,
-    testOnly: true,
     callback: ({ interaction, member, channel, message }) => __awaiter(void 0, void 0, void 0, function* () {
         let target = interaction.options.getUser('target');
         let row = new discord_js_1.MessageActionRow()
