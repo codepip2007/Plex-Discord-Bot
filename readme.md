@@ -7,7 +7,10 @@ All commands are slash commands unless otherwise noted
 Commands:
 access      |   Grants a user access to a text or voice channel
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 09aa6964cd063d7730e6f9a3c475f363cc3c73b8
 addrole     |   Adds a role to the role select menu
 
 ban         |   Bans a user from the server
@@ -54,4 +57,8 @@ warn        |   Warns a user
 
 roast       |   Roasts the mentioned user
 
+<<<<<<< HEAD
 tod         |   Truth or Dare with a user
+=======
+!help       |   Legacy command! Displays the bot's help menu
+>>>>>>> 09aa6964cd063d7730e6f9a3c475f363cc3c73b8
