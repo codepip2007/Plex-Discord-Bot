@@ -43,10 +43,6 @@ client.on('ready', () => {
         emoji: '🔨'
       },
       {
-        name: 'Configuration',
-        emoji: '⚙'
-      },
-      {
         name: 'Messages',
         emoji: '📩'
       },
