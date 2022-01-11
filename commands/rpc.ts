@@ -49,7 +49,7 @@ export default {
                 })
             } else if (collection.first()?.customId === 'rock' && botChoice === 'Paper') {
                 interaction.editReply({
-                    content: `I chose "Paper". You win!`,
+                    content: `I chose "Paper". I win!`,
                     components: []
                 })
             } else if (collection.first()?.customId === 'rock' && botChoice === 'Scissors') {

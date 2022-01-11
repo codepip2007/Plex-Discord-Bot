@@ -49,7 +49,7 @@ exports.default = {
             }
             else if (((_b = collection.first()) === null || _b === void 0 ? void 0 : _b.customId) === 'rock' && botChoice === 'Paper') {
                 interaction.editReply({
-                    content: `I chose "Paper". You win!`,
+                    content: `I chose "Paper". I win!`,
                     components: []
                 });
             }
