@@ -5,7 +5,6 @@ export default {
     category: 'Commands',
     description: 'Shows all commands',
     slash: true,
-    testOnly: true,
 
     callback: async ({ interaction, channel }) => {
         let fun = new MessageEmbed()

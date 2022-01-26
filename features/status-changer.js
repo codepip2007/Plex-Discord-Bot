@@ -4,8 +4,7 @@ exports.config = void 0;
 exports.default = (client) => {
     const statusOptions = [
         'Plex',
-        '!c for commands',
-        '/rpc to play "Rock, "Paper", "Scissors"'
+        '/plex for commands',
     ];
     let counter = 0;
     const updateStatus = () => {

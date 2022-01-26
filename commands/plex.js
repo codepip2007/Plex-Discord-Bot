@@ -14,7 +14,6 @@ exports.default = {
     category: 'Commands',
     description: 'Shows all commands',
     slash: true,
-    testOnly: true,
     callback: ({ interaction, channel }) => __awaiter(void 0, void 0, void 0, function* () {
         let fun = new discord_js_1.MessageEmbed()
             .setDescription("Commands Accepted by Plex")

@@ -16,7 +16,6 @@ exports.default = {
     minArgs: 1,
     expectedArgs: '<user>',
     expectedArgsTypes: ['USER'],
-    testOnly: true,
     callback: ({ interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         let target = interaction.options.getUser('user');
         let arr = ["Mirrors can't talk. lucky for you, they can't laugh either ",

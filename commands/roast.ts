@@ -7,7 +7,6 @@ export default {
     minArgs: 1,
     expectedArgs: '<user>',
     expectedArgsTypes: ['USER'],
-    testOnly: true,
 
     callback: async ({ interaction }) => {
         let target = interaction.options.getUser('user')

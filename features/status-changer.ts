@@ -3,8 +3,7 @@ import { Client } from "discord.js";
 export default (client: Client) => {
     const statusOptions = [
         'Plex',
-        '!c for commands',
-        '/rpc to play "Rock, "Paper", "Scissors"'
+        '/plex for commands',
     ]
     let counter = 0
 
