@@ -7,6 +7,7 @@ export default {
     slash: true,
     guildOnly: true,
     minArgs: 3,
+    requiredRoles: true,
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING','STRING'],
 

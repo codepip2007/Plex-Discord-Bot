@@ -15,6 +15,7 @@ exports.default = {
     slash: true,
     guildOnly: true,
     minArgs: 3,
+    requiredRoles: true,
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
     callback: ({ interaction }) => __awaiter(void 0, void 0, void 0, function* () {
