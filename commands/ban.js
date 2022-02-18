@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     category: 'Moderation',
     description: 'Bans a user',
-    permissions: ['ADMINISTRATOR'],
+    requireRoles: true,
     slash: true,
     guildOnly: true,
     minArgs: 2,
@@ -34,7 +34,6 @@ exports.default = {
             });
         }
         const reason = interaction.options.getString('reason');
-        target.send(`**You have been banned from the *${guild.name}* Discord Server! Reason:** ${reason}`);
         yield target.ban({
             reason,
             days: 7
@@ -43,5 +42,6 @@ exports.default = {
             content: `You banned <@${target.id}>`,
             ephemeral: true,
         });
+        yield target.send(`**You have been banned from the *${guild.name}* Discord Server! Reason:** ${reason}`);
     })
 };

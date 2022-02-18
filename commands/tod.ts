@@ -34,7 +34,7 @@ export default {
         })
 
         let collector = channel.createMessageComponentCollector({
-            time: 1000 * 60 * 5, //5 Minutes
+            time: 1000 * 60 * 2, //2 Minutes
         })
 
         collector.on('collect', async (collection) => {

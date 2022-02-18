@@ -30,17 +30,22 @@ export default {
                     type: 'STRING',
                     description: 'The ID of the report message',
                     required: true
+                },
+                {
+                    name: 'action',
+                    type: 'STRING',
+                    description: 'The action you took',
+                    required: true
                 }
             ]
         }
     ],
     requireRoles: true,
 
-    testOnly: true,
-
     callback: async ({ interaction, guild }) => {
         let command = interaction.options.getSubcommand()
         let mesId = interaction.options.getString('report')!
+        let action = interaction.options.getString('action')
 
         let reportChannel = guild?.channels.cache.find((channel) => channel.name == 'reports') as TextChannel
 
@@ -57,7 +62,7 @@ export default {
 
         if (command == 'claim') {
             newEmbed.fields[2] = {
-                name: 'Status',
+                name: 'Status:',
                 value: `Claimed by ${interaction.user}`,
                 inline: false
             }
@@ -73,10 +78,11 @@ export default {
             })
         } else if (command == 'resolve') {
             newEmbed.fields[2] = {
-                name: 'Status',
+                name: 'Status:',
                 value: `Resolved by ${interaction.user}`,
                 inline: false
             }
+            newEmbed.addField('Action Taken:', `${action}`)
             newEmbed.setColor('GREEN')
 
             targetMessage.edit({

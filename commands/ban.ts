@@ -4,7 +4,7 @@ import { ICommand } from "wokcommands";
 export default {
     category: 'Moderation',
     description: 'Bans a user',
-    permissions: ['ADMINISTRATOR'],
+    requireRoles: true,
     slash: true,
     guildOnly: true,
     minArgs: 2,
@@ -27,7 +27,6 @@ export default {
             })
         }
         const reason = interaction.options.getString('reason')!
-        target.send(`**You have been banned from the *${guild!.name}* Discord Server! Reason:** ${reason}`)
 
         await target.ban({
             reason,
@@ -37,5 +36,6 @@ export default {
             content: `You banned <@${target.id}>`,
             ephemeral: true,
         })
+        await target.send(`**You have been banned from the *${guild!.name}* Discord Server! Reason:** ${reason}`)
     }
 } as ICommand

@@ -9,11 +9,16 @@ exports.default = {
     expectedArgsTypes: ['STRING', 'USER'],
     guildOnly: true,
     slash: true,
-    testOnly: true,
     callback: ({ interaction, guild }) => {
         let report = interaction.options.getString('message');
         let user = interaction.options.getUser('offender');
         let reportChannel = guild === null || guild === void 0 ? void 0 : guild.channels.cache.find((channel) => channel.name == 'reports');
+        if (!reportChannel) {
+            interaction.reply({
+                content: 'Report could not send! Please contact a moderator!',
+                ephemeral: true
+            });
+        }
         let embed = new discord_js_1.MessageEmbed()
             .setTitle('Report')
             .setDescription(report)

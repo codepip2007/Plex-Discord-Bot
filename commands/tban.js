@@ -94,7 +94,7 @@ exports.default = {
                 ephemeral: true
             });
         }
-        user.send(`**You have been temporarily banned from the *${guild.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`);
+        yield user.send(`**You have been temporarily banned from the *${guild.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`);
         interaction.reply({
             content: `<@${userId}> has been banned for "${duration}"`,
             ephemeral: true

@@ -32,7 +32,7 @@ export default {
             time = 1000 * 60 *60 * 24 * 7
         } else {
             interaction.reply({
-                content: 'Invalid time! Please use 5m, 10, 1h, 1d, or 1w for 5 minutes, 10 minutes, 1 hour, 1 day, or 1 week respectively!',
+                content: 'Invalid time! Please use 60s, 5m, 10m, 1h, 1d, or 1w for 60 seconds, 5 minutes, 10 minutes, 1 hour, 1 day, or 1 week respectively!',
                 ephemeral: true
             })
         }

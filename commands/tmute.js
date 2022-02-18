@@ -104,7 +104,7 @@ exports.default = {
                 ephemeral: true
             });
         }
-        user.send(`**You have been temporarily muted in the *${guild.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`);
+        yield user.send(`**You have been temporarily muted in the *${guild.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`);
         interaction.reply({
             content: `<@${userId}> has been muted for "${duration}"`,
             ephemeral: true

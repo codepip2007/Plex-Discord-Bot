@@ -97,7 +97,7 @@ export default {
             })
         }
 
-        user!.send(`**You have been temporarily banned from the *${guild!.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`)
+        await user!.send(`**You have been temporarily banned from the *${guild!.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`)
 
         interaction.reply({
             content: `<@${userId}> has been banned for "${duration}"`,

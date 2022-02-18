@@ -4,7 +4,7 @@ import { ICommand } from "wokcommands";
 export default {
     category: 'Messages',
     description: 'Sends a message',
-    permissions: ['ADMINISTRATOR'],
+    requireRoles: true,
     minArgs: 2,
     expectedArgs: '<channel> <text>',
     expectedArgsTypes: ['CHANNEL', 'STRING'],

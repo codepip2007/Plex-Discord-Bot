@@ -33,8 +33,8 @@ exports.default = {
             });
         }
         const reason = interaction.options.getString('reason');
-        yield target.send(`**You have been kicked from the *${guild.name}* Discord server! Reason:** ${reason}`);
         target.kick(reason);
+        yield target.send(`**You have been kicked from the *${guild.name}* Discord server! Reason:** ${reason}`);
         interaction.reply({
             content: `You kicked <@${target.id}>`,
             ephemeral: true

@@ -27,9 +27,9 @@ export default {
         }
         const reason = interaction.options.getString('reason')!
 
-        await target.send(`**You have been kicked from the *${guild!.name}* Discord server! Reason:** ${reason}`)
-
         target.kick(reason)
+
+        await target.send(`**You have been kicked from the *${guild!.name}* Discord server! Reason:** ${reason}`)
         interaction.reply({
             content: `You kicked <@${target.id}>`,
             ephemeral: true

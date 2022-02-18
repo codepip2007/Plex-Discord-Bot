@@ -6,14 +6,58 @@ export default {
     description: 'Grants a user access to a channel',
     slash: true, // Only a slash command
     guildOnly: true, // Only used in guilds
-    minArgs: 2,
-    expectedArgs: '<user> <channel>',
-    expectedArgsTypes: ['USER', 'CHANNEL'],
+    // minArgs: 2,
+    // expectedArgs: '<user> <channel>',
+    // expectedArgsTypes: ['USER', 'CHANNEL'],
+
+    options: [
+        {
+            type: 'SUB_COMMAND',
+            name: 'add',
+            description: 'Give a user access to a channel',
+            options: [
+                {
+                    name: 'user',
+                    type: 'USER',
+                    description: 'The user to give access to',
+                    required: true
+                },
+                {
+                    name: 'channel',
+                    type: 'CHANNEL',
+                    description: 'The channel that the user will have access to',
+                    required: true,
+                }
+            ]
+        },
+        {
+            type: 'SUB_COMMAND',
+            name: 'remove',
+            description: 'Remove a user\'s access from a channel',
+            options: [
+                {
+                    name: 'user',
+                    type: 'USER',
+                    description: 'The user to remove access from',
+                    required: true,
+                },
+                {
+                    name: 'channel',
+                    type: 'CHANNEL',
+                    description: 'The channel the user will no longer have access to',
+                    required: true
+                }
+            ]
+        }
+    ],
+
+    testOnly: true,
 
     callback: async ({ message, interaction }) => {
         let targetChannel = interaction.options.getChannel('channel') as TextChannel
         let targetUser = interaction.options.getUser('user')
         let targetUserId = targetUser?.id
+        let command = interaction.options.getSubcommand()
 
         if (!targetChannel) {
             interaction.reply({
@@ -29,21 +73,41 @@ export default {
             })
         }
 
-       if (targetChannel!.isText()) {
-           targetChannel!.permissionOverwrites!.create(targetUserId!, { // Creates permissions
-               VIEW_CHANNEL: true,
-               CONNECT: true
-           })
+        if (command == 'add') {
 
-           interaction.reply({
-            content: `<@${targetUserId}> was granted access to ${targetChannel}`,
-            ephemeral: true
-           })
-       } else {
-           interaction.reply({
-                content: 'Unknown channel type',
-                ephemeral: true
-           })
-       }
+            if (targetChannel!.isText()) {
+                targetChannel!.permissionOverwrites!.create(targetUserId!, { // Creates permissions
+                    VIEW_CHANNEL: true,
+                    CONNECT: true
+                })
+
+                interaction.reply({
+                    content: `<@${targetUserId}> was granted access to ${targetChannel}`,
+                    ephemeral: true
+                })
+            } else {
+                interaction.reply({
+                    content: 'Unknown channel type! Please tag a text channel.',
+                    ephemeral: true
+                })
+            }
+        } else if (command == 'remove') {
+            if (targetChannel.isText()) {
+                targetChannel.permissionOverwrites.create(targetUserId!, {
+                    VIEW_CHANNEL: false,
+                    CONNECT: false
+                })
+     
+                interaction.reply({
+                     content: `<@${targetUserId}> no longer has access to ${targetChannel}`,
+                     ephemeral: true
+                })
+            } else {
+                interaction.reply({
+                     content: 'Unknown channel type! Please tag a text channel.',
+                     ephemeral: true
+                })
+            }
+        }
     }
 } as ICommand
