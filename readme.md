@@ -1,6 +1,6 @@
 Plex Discord Bot Docs
 
-Current Version: 1.4
+Current Version: 1.6
 
 All commands are slash commands unless otherwise noted
 
@@ -34,7 +34,7 @@ resetsts    |   Resets the bot's status
 
 role        |   Add, removes, checks if a user has role
 
-rpc         |   PRE-RELEASE: Plays 'rock, paper, scissors' with the bot
+rpc         |   Plays 'rock, paper, scissors' with the bot
 
 send        |   Sends a message
 
@@ -57,3 +57,13 @@ roast       |   Roasts the mentioned user
 tod         |   Truth or Dare with a user
 
 !help       |   Legacy command! Displays the bot's help menu
+
+timeout     |   Tiemout a user
+
+report      |   Send a report to the moderators (server must have a channel named 'reports'
+
+modrep      |   Claim or resolve a report
+
+suggest     |   Suggest a feature to the Plex Developers
+
+suggestion  |   Accept or reject a suggestion (developers only)
