@@ -11,7 +11,7 @@ export default {
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    testOnly: true,
+    // testOnly: true,
 
     callback: async ({ interaction }) => {
         const target = interaction.options.getMember('user') as GuildMember

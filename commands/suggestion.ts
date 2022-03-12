@@ -7,7 +7,7 @@ export default {
     requireRoles: true,
     slash: true,
 
-    testOnly: true,
+    // testOnly: true,
 
     guildOnly: true,
     options: [

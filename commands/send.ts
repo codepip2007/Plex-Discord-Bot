@@ -11,7 +11,7 @@ export default {
     slash: true,
     guildOnly: true,
 
-    testOnly: true,
+    // testOnly: true,
 
     callback: ({ message, interaction, args }) => {
         const channel = interaction.options.getChannel('channel') as TextChannel

@@ -18,7 +18,7 @@ exports.default = {
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
-    testOnly: true,
+    // testOnly: true,
     callback: ({ interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         const target = interaction.options.getMember('user');
         if (!target) {

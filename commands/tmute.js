@@ -21,7 +21,7 @@ exports.default = {
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
     slash: true,
-    testOnly: true,
+    // testOnly: true,
     callback: ({ args, member: staff, guild, client, message, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         if (!guild) {
             interaction.reply({

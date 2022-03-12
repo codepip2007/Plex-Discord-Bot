@@ -10,7 +10,7 @@ export default {
     guildOnly: true,
     slash: true,
 
-    testOnly: true,
+    // testOnly: true,
 
     callback: ({ interaction, guild }) => {
         let report = interaction.options.getString('message')

@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     category: 'Configuration',
-    testOnly: true,
+    // testOnly: true,
     description: 'Gives a role to a user',
     permissions: ['MANAGE_ROLES'],
     slash: true,

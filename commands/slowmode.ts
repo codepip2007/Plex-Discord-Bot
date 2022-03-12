@@ -10,7 +10,7 @@ export default {
     expectedArgsTypes: ['CHANNEL', 'NUMBER'],
     minArgs: 2,
 
-    testOnly: true,
+    // testOnly: true,
 
     callback: async ({ interaction, guild, user }) => {
         let target = interaction.options.getChannel('channel')

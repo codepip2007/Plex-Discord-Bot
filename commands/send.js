@@ -9,7 +9,7 @@ exports.default = {
     expectedArgsTypes: ['CHANNEL', 'STRING'],
     slash: true,
     guildOnly: true,
-    testOnly: true,
+    // testOnly: true,
     callback: ({ message, interaction, args }) => {
         const channel = interaction.options.getChannel('channel');
         if (!channel || channel.type !== 'GUILD_TEXT') {

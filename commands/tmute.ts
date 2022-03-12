@@ -11,7 +11,7 @@ export default {
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
     slash: true,
 
-    testOnly: true,
+    // testOnly: true,
 
     callback: async ({ 
         args,

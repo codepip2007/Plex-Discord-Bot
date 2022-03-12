@@ -23,7 +23,7 @@ exports.default = {
     minArgs: 1,
     expectedArgs: '<user>',
     expectedArgsTypes: ['USER'],
-    testOnly: true,
+    // testOnly: true,
     callback: ({ guild, member: staff, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         let user = interaction.options.getUser('user');
         let warnings = yield warn_schema_1.default.find({

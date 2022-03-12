@@ -15,7 +15,7 @@ exports.default = {
     description: 'Accept or Deny a suggestion',
     requireRoles: true,
     slash: true,
-    testOnly: true,
+    // testOnly: true,
     guildOnly: true,
     options: [
         {

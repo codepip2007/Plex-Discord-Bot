@@ -17,7 +17,7 @@ exports.default = {
     slash: true,
     expectedArgs: '<amount>',
     expectedArgsTypes: ['NUMBER'],
-    testOnly: true,
+    // testOnly: true,
     callback: ({ message, channel, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         const amount = interaction.options.getNumber('amount');
         if (!amount) {

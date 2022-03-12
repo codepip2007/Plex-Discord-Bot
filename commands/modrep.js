@@ -50,7 +50,7 @@ exports.default = {
         }
     ],
     requireRoles: true,
-    testOnly: true,
+    // testOnly: true,
     callback: ({ interaction, guild }) => __awaiter(void 0, void 0, void 0, function* () {
         let command = interaction.options.getSubcommand();
         let mesId = interaction.options.getString('report');

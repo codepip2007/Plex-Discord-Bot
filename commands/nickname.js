@@ -9,7 +9,7 @@ exports.default = {
     expectedArgs: '<user> <nickname>',
     expectedArgsTypes: ['USER', 'STRING'],
     permissions: ['MANAGE_NICKNAMES'],
-    testOnly: true,
+    // testOnly: true,
     callback: ({ interaction }) => {
         let target = interaction.options.getMember('user');
         let nick = interaction.options.getString('nickname');

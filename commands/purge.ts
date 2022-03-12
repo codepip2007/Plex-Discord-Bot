@@ -9,7 +9,7 @@ export default {
     expectedArgs: '<amount>',
     expectedArgsTypes: ['NUMBER'],
 
-    testOnly: true,
+    // testOnly: true,
     
     callback: async ({ message, channel, interaction }) => {
         const amount = interaction.options.getNumber('amount')!

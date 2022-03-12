@@ -55,7 +55,7 @@ exports.default = {
             ]
         }
     ],
-    testOnly: true,
+    // testOnly: true,
     callback: ({ message, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         let targetChannel = interaction.options.getChannel('channel');
         let targetUser = interaction.options.getUser('user');

@@ -15,7 +15,7 @@ exports.default = {
     description: 'Remove or add a role\'s access to a channel',
     guildOnly: true,
     slash: true,
-    testOnly: true,
+    // testOnly: true,
     requireRoles: true,
     options: [
         {

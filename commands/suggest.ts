@@ -9,7 +9,7 @@ export default {
     expectedArgsTypes: ['STRING'],
     slash: true,
 
-    testOnly: true,
+    // testOnly: true,
 
     callback: async ({ interaction, client }) => {
         let message = interaction.options.getString('message')

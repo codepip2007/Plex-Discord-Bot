@@ -18,7 +18,7 @@ exports.default = {
     permissions: ['KICK_MEMBERS'],
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
-    testOnly: true,
+    // testOnly: true,
     callback: ({ interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         let target = interaction.options.getMember('user');
         let reason = interaction.options.getString('reason');

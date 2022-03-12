@@ -11,7 +11,7 @@ export default {
     expectedArgsTypes: ['USER', 'STRING'],
     permissions: ['BAN_MEMBERS'],
 
-    testOnly: true,
+    // testOnly: true,
 
     callback: async ({ interaction }) => {
         const target = interaction.options.getMember('user') as GuildMember

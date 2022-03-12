@@ -18,7 +18,7 @@ exports.default = {
     expectedArgs: '<channel> <slowmode>',
     expectedArgsTypes: ['CHANNEL', 'NUMBER'],
     minArgs: 2,
-    testOnly: true,
+    // testOnly: true,
     callback: ({ interaction, guild, user }) => __awaiter(void 0, void 0, void 0, function* () {
         let target = interaction.options.getChannel('channel');
         let sl = interaction.options.getNumber('slowmode');

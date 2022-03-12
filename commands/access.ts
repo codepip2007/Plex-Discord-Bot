@@ -49,7 +49,7 @@ export default {
         }
     ],
 
-                            testOnly: true,
+                            // testOnly: true,
 
     callback: async ({ message, interaction }) => {
         let targetChannel = interaction.options.getChannel('channel') as TextChannel

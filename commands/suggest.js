@@ -17,7 +17,7 @@ exports.default = {
     expectedArgs: '<message>',
     expectedArgsTypes: ['STRING'],
     slash: true,
-    testOnly: true,
+    // testOnly: true,
     callback: ({ interaction, client }) => __awaiter(void 0, void 0, void 0, function* () {
         let message = interaction.options.getString('message');
         const server = client.guilds.cache.get('939091496760668160');
