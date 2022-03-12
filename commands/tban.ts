@@ -6,7 +6,6 @@ export default {
     category: 'Moderation',
     description: 'Bans a user',
     permissions: ['BAN_MEMBERS'],
-    requireRoles: true,
     minArgs: 3,
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
@@ -97,11 +96,8 @@ export default {
             })
         }
 
-        await user!.send(`**You have been temporarily banned from the *${guild!.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`)
-
         interaction.reply({
-            content: `<@${userId}> has been banned for "${duration}"`,
-            ephemeral: true
+            content: `<@${userId}> has been banned for "${duration}", reason: '${reason}'`,
         })
 
 

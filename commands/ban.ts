@@ -4,16 +4,17 @@ import { ICommand } from "wokcommands";
 export default {
     category: 'Moderation',
     description: 'Bans a user',
-    requireRoles: true,
     slash: true,
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
+    permissions: ['BAN_MEMBERS'],
 
-    callback: async ({ message, interaction, args, guild }) => {
+    testOnly: true,
+
+    callback: async ({ interaction }) => {
         const target = interaction.options.getMember('user') as GuildMember
-        const userDm = target!.id
         if (!target) {
             interaction.reply({
                 content: 'Please tag someone to ban',
@@ -33,9 +34,7 @@ export default {
             days: 7
         })
         interaction.reply({
-            content: `You banned <@${target.id}>`,
-            ephemeral: true,
+            content: `You banned <@${target.id}> for ${reason}`,
         })
-        await target.send(`**You have been banned from the *${guild!.name}* Discord Server! Reason:** ${reason}`)
     }
 } as ICommand

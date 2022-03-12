@@ -6,9 +6,7 @@ export default {
     description: 'Grants a user access to a channel',
     slash: true, // Only a slash command
     guildOnly: true, // Only used in guilds
-    // minArgs: 2,
-    // expectedArgs: '<user> <channel>',
-    // expectedArgsTypes: ['USER', 'CHANNEL'],
+    requireRoles: true,
 
     options: [
         {
@@ -51,7 +49,7 @@ export default {
         }
     ],
 
-    testOnly: true,
+                            testOnly: true,
 
     callback: async ({ message, interaction }) => {
         let targetChannel = interaction.options.getChannel('channel') as TextChannel

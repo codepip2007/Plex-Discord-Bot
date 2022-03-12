@@ -12,13 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     category: 'Moderation',
     description: 'Kicks a user',
-    permissions: ['ADMINISTRATOR'],
+    permissions: ['KICK_MEMBERS'],
     slash: true,
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, interaction, args, guild }) => __awaiter(void 0, void 0, void 0, function* () {
+    testOnly: true,
+    callback: ({ interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         const target = interaction.options.getMember('user');
         if (!target) {
             interaction.reply({
@@ -34,9 +35,8 @@ exports.default = {
         }
         const reason = interaction.options.getString('reason');
         target.kick(reason);
-        yield target.send(`**You have been kicked from the *${guild.name}* Discord server! Reason:** ${reason}`);
         interaction.reply({
-            content: `You kicked <@${target.id}>`,
+            content: `You kicked <@${target.id}> for '${reason}'`,
             ephemeral: true
         });
     })

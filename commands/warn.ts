@@ -12,6 +12,8 @@ export default {
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
+    testOnly: true,
+
     callback: async ({ guild, member: staff, interaction }) => {
         let user = interaction.options.getUser('user')
         let reason = interaction.options.getString('reason')
@@ -25,11 +27,10 @@ export default {
 
         return {
             custom: true,
-            content: `<@${user?.id}> has been warned\n${warning.id}`,
+            content: `<@${user?.id}> has been warned\n${warning.id}\nReason: ${reason}`,
             allowedMentions: {
                 users: [],
             },
-            ephemeral: true
         }
     }
 } as ICommand

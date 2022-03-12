@@ -8,8 +8,7 @@ exports.default = {
     callback: ({ interaction, guild }) => {
         // let { name, memberCount } = guild!
         interaction.reply({
-            content: `**Server Name:** ${guild.name}\n**Members:** ${guild.memberCount}`,
-            ephemeral: true
+            content: `**Server Name:** ${guild.name}\n**Members:** ${guild.memberCount}`
         });
     }
 };

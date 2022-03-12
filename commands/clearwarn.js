@@ -22,13 +22,14 @@ exports.default = {
     minArgs: 2,
     expectedArgs: '<user> <id>',
     expectedArgsTypes: ['USER', 'STRING'],
+    testOnly: true,
     callback: ({ guild, member: staff, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         let user = interaction.options.getUser('user');
         let id = interaction.options.getString('id');
         let warning = yield warn_schema_1.default.findByIdAndDelete(id);
         return {
             custom: true,
-            content: `Removed warning ${warning.id} from <@${user === null || user === void 0 ? void 0 : user.id}>`,
+            content: `Removed warning \`${warning.id}\` from <@${user === null || user === void 0 ? void 0 : user.id}>`,
             allowedMentions: {
                 users: [],
             },

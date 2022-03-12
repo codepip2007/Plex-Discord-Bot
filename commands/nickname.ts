@@ -9,6 +9,9 @@ export default {
     minArgs: 2,
     expectedArgs: '<user> <nickname>',
     expectedArgsTypes: ['USER', 'STRING'],
+    permissions: ['MANAGE_NICKNAMES'],
+
+    testOnly: true,
 
     callback: ({ interaction }) => {
         let target = interaction.options.getMember('user') as GuildMember

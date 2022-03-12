@@ -4,14 +4,16 @@ import { ICommand } from "wokcommands";
 export default {
     category: 'Moderation',
     description: 'Kicks a user',
-    permissions: ['ADMINISTRATOR'],
+    permissions: ['KICK_MEMBERS'],
     slash: true,
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
 
-    callback: async ({ message, interaction, args, guild }) => {
+    testOnly: true,
+
+    callback: async ({ interaction }) => {
         const target = interaction.options.getMember('user') as GuildMember
         if (!target) {
             interaction.reply({
@@ -29,9 +31,8 @@ export default {
 
         target.kick(reason)
 
-        await target.send(`**You have been kicked from the *${guild!.name}* Discord server! Reason:** ${reason}`)
         interaction.reply({
-            content: `You kicked <@${target.id}>`,
+            content: `You kicked <@${target.id}> for '${reason}'`,
             ephemeral: true
         })
     }

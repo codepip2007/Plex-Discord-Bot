@@ -14,9 +14,7 @@ exports.default = {
     description: 'Grants a user access to a channel',
     slash: true,
     guildOnly: true,
-    // minArgs: 2,
-    // expectedArgs: '<user> <channel>',
-    // expectedArgsTypes: ['USER', 'CHANNEL'],
+    requireRoles: true,
     options: [
         {
             type: 'SUB_COMMAND',

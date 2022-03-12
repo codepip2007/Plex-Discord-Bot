@@ -1,5 +1,5 @@
-import { TextChannel } from 'discord.js'
-import { ICommand } from 'wokcommands'
+import { TextChannel } from 'discord.js';
+import { ICommand } from 'wokcommands';
 
 export default {
     category: 'Messages',
@@ -10,9 +10,11 @@ export default {
     expectedArgs: '<channel> <messageid> <text>',
     expectedArgsTypes: ['CHANNEL', 'STRING', 'STRING'],
 
+    testOnly: true,
+
     callback: async ({ message, interaction, args }) => {
         const channel = interaction.options.getChannel('channel') as TextChannel
-        if(!channel || channel.type !== 'GUILD_TEXT') {
+        if(!channel || !channel.isText()) {
             interaction.reply({
                 content: 'Please tag a text channel',
                 ephemeral: true

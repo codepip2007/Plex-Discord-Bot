@@ -15,9 +15,10 @@ exports.default = {
     slash: true,
     guildOnly: true,
     minArgs: 3,
-    requiredRoles: true,
+    permissions: ['KICK_MEMBERS'],
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
+    testOnly: true,
     callback: ({ interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         let target = interaction.options.getMember('user');
         let reason = interaction.options.getString('reason');
@@ -43,7 +44,7 @@ exports.default = {
         }
         else {
             interaction.reply({
-                content: 'Invalid time! Please use 5m, 10, 1h, 1d, or 1w for 5 minutes, 10 minutes, 1 hour, 1 day, or 1 week respectively!',
+                content: 'Invalid time! Please use 60s, 5m, 10m, 1h, 1d, or 1w for 60 seconds, 5 minutes, 10 minutes, 1 hour, 1 day, or 1 week respectively!',
                 ephemeral: true
             });
         }

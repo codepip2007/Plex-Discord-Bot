@@ -16,12 +16,12 @@ const punishment_schema_1 = __importDefault(require("../models/punishment-schema
 exports.default = {
     category: 'Moderation',
     description: 'Mutes a user',
-    permissions: ['BAN_MEMBERS'],
-    requireRoles: true,
+    permissions: ['KICK_MEMBERS'],
     minArgs: 3,
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
     slash: true,
+    testOnly: true,
     callback: ({ args, member: staff, guild, client, message, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         if (!guild) {
             interaction.reply({
@@ -104,9 +104,8 @@ exports.default = {
                 ephemeral: true
             });
         }
-        yield user.send(`**You have been temporarily muted in the *${guild.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`);
         interaction.reply({
-            content: `<@${userId}> has been muted for "${duration}"`,
+            content: `<@${userId}> has been muted for "${duration}", reason: '${reason}'`,
             ephemeral: true
         });
     })

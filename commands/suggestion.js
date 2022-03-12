@@ -13,8 +13,9 @@ const discord_js_1 = require("discord.js");
 exports.default = {
     category: 'Configuration',
     description: 'Accept or Deny a suggestion',
-    ownerOnly: true,
+    requireRoles: true,
     slash: true,
+    testOnly: true,
     guildOnly: true,
     options: [
         {
@@ -60,7 +61,7 @@ exports.default = {
         let command = interaction.options.getSubcommand();
         let mesId = interaction.options.getString('message');
         let reason = interaction.options.getString('reason');
-        let suggestChannel = '935797241585729546';
+        let suggestChannel = '952064098596696115';
         let sugchan = guild === null || guild === void 0 ? void 0 : guild.channels.cache.get(suggestChannel);
         const targetMessage = yield sugchan.messages.fetch(mesId, {
             cache: true,

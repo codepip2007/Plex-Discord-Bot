@@ -12,6 +12,8 @@ export default {
     expectedArgs: '<user> <id>',
     expectedArgsTypes: ['USER', 'STRING'],
 
+    testOnly: true,
+
     callback: async ({ guild, member: staff, interaction }) => {
         let user = interaction.options.getUser('user')
         let id = interaction.options.getString('id')
@@ -20,7 +22,7 @@ export default {
 
         return {
             custom: true,
-            content: `Removed warning ${warning.id} from <@${user?.id}>`,
+            content: `Removed warning \`${warning.id}\` from <@${user?.id}>`,
             allowedMentions: {
                 users: [],
             },

@@ -10,6 +10,8 @@ export default {
     guildOnly: true,
     slash: true,
 
+    testOnly: true,
+
     callback: ({ interaction, guild }) => {
         let report = interaction.options.getString('message')
         let user = interaction.options.getUser('offender')

@@ -42,6 +42,8 @@ export default {
     ],
     requireRoles: true,
 
+    testOnly: true,
+
     callback: async ({ interaction, guild }) => {
         let command = interaction.options.getSubcommand()
         let mesId = interaction.options.getString('report')!

@@ -11,13 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 exports.default = {
+    testOnly: true,
     category: 'Configuration',
     description: 'Adds a role to the auto role message',
-    permissions: ['ADMINISTRATOR'],
     minArgs: 3,
     maxArgs: 3,
     expectedArgs: '<channel> <messageId> <role>',
     expectedArgsTypes: ['CHANNEL', 'STRING', 'ROLE'],
+    requireRoles: true,
     slash: true,
     guildOnly: true,
     init: (client) => {
@@ -70,10 +71,10 @@ exports.default = {
                 ephemeral: true,
             });
         }
-        const bot = '912138759229833226';
+        const bot = '949962242923827280';
         if (targetMessage.author.id !== bot) {
             interaction.reply({
-                content: `Please provide a message ID that was sent from <${bot}>`,
+                content: `Please provide a message ID that was sent from <@${bot}>`,
                 ephemeral: true,
             });
         }

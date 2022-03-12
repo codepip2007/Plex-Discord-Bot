@@ -4,8 +4,11 @@ import { ICommand } from 'wokcommands'
 export default {
     category: 'Configuration',
     description: 'Accept or Deny a suggestion',
-    ownerOnly: true,
+    requireRoles: true,
     slash: true,
+
+    testOnly: true,
+
     guildOnly: true,
     options: [
         {
@@ -53,7 +56,7 @@ export default {
         let mesId = interaction.options.getString('message')!
         let reason = interaction.options.getString('reason')
 
-        let suggestChannel = '935797241585729546'
+        let suggestChannel = '952064098596696115'
         let sugchan = guild?.channels.cache.get(suggestChannel) as TextChannel
 
         const targetMessage = await sugchan.messages.fetch(mesId, {

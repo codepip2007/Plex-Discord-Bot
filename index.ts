@@ -24,7 +24,7 @@ client.on('ready', () => {
     // Allow importing of .ts files if you are using ts-node
     typeScript: false,
     // Specify which are the Test Servers
-    testServers: '917598099952787526',
+    testServers: '949962861369765898',
     // Specify which users are bot owners
     botOwners: '759374512256057344',
     // Pass in the new dbOptions

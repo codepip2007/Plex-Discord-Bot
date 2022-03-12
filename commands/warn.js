@@ -22,6 +22,7 @@ exports.default = {
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
+    testOnly: true,
     callback: ({ guild, member: staff, interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         let user = interaction.options.getUser('user');
         let reason = interaction.options.getString('reason');
@@ -33,11 +34,10 @@ exports.default = {
         });
         return {
             custom: true,
-            content: `<@${user === null || user === void 0 ? void 0 : user.id}> has been warned\n${warning.id}`,
+            content: `<@${user === null || user === void 0 ? void 0 : user.id}> has been warned\n${warning.id}\nReason: ${reason}`,
             allowedMentions: {
                 users: [],
             },
-            ephemeral: true
         };
     })
 };

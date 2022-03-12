@@ -13,6 +13,8 @@ export default {
     expectedArgs: '<user>',
     expectedArgsTypes: ['USER'],
 
+    testOnly: true,
+
     callback: async ({ guild, member: staff, interaction }) => {
         let user = interaction.options.getUser('user')
 

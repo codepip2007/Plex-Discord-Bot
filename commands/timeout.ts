@@ -7,9 +7,11 @@ export default {
     slash: true,
     guildOnly: true,
     minArgs: 3,
-    requiredRoles: true,
+    permissions: ['KICK_MEMBERS'],
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING','STRING'],
+
+    testOnly: true,
 
     callback: async ({ interaction }) => {
         let target = interaction.options.getMember('user') as GuildMember

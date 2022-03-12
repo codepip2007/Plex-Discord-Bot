@@ -8,6 +8,9 @@ export default {
     description: 'Remove or add a role\'s access to a channel',
     guildOnly: true,
     slash: true,
+
+    testOnly: true,
+    
     requireRoles: true,
     options: [
         {
@@ -49,8 +52,6 @@ export default {
             ]
         },
     ],
-
-    testOnly: true,
 
     callback: async ({ interaction }) => {
         let command = interaction.options.getSubcommand()

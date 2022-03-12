@@ -3,6 +3,7 @@ import { ICommand } from 'wokcommands';
 
 export default {
     category: 'Configuration',
+    testOnly: true,
     description: 'Gives a role to a user',
     permissions: ['MANAGE_ROLES'],
     slash: true,

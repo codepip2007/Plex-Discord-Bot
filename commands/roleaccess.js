@@ -15,6 +15,7 @@ exports.default = {
     description: 'Remove or add a role\'s access to a channel',
     guildOnly: true,
     slash: true,
+    testOnly: true,
     requireRoles: true,
     options: [
         {
@@ -56,7 +57,6 @@ exports.default = {
             ]
         },
     ],
-    testOnly: true,
     callback: ({ interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         let command = interaction.options.getSubcommand();
         let channel = interaction.options.getChannel('channel');

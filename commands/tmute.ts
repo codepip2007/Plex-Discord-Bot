@@ -5,12 +5,13 @@ import punishmentSchema from '../models/punishment-schema'
 export default {
     category: 'Moderation',
     description: 'Mutes a user',
-    permissions: ['BAN_MEMBERS'],
-    requireRoles: true,
+    permissions: ['KICK_MEMBERS'],
     minArgs: 3,
     expectedArgs: '<user> <duration> <reason>',
     expectedArgsTypes: ['USER', 'STRING', 'STRING'],
     slash: true,
+
+    testOnly: true,
 
     callback: async ({ 
         args,
@@ -108,10 +109,9 @@ export default {
             })
         }
 
-        await user!.send(`**You have been temporarily muted in the *${guild!.name}* Discord server! Duration:** ${duration}. **Reason:** ${reason}`)
 
         interaction.reply({
-            content: `<@${userId}> has been muted for "${duration}"`,
+            content: `<@${userId}> has been muted for "${duration}", reason: '${reason}'`,
             ephemeral: true
         })
 

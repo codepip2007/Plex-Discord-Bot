@@ -12,15 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     category: 'Moderation',
     description: 'Bans a user',
-    requireRoles: true,
     slash: true,
     guildOnly: true,
     minArgs: 2,
     expectedArgs: '<user> <reason>',
     expectedArgsTypes: ['USER', 'STRING'],
-    callback: ({ message, interaction, args, guild }) => __awaiter(void 0, void 0, void 0, function* () {
+    permissions: ['BAN_MEMBERS'],
+    testOnly: true,
+    callback: ({ interaction }) => __awaiter(void 0, void 0, void 0, function* () {
         const target = interaction.options.getMember('user');
-        const userDm = target.id;
         if (!target) {
             interaction.reply({
                 content: 'Please tag someone to ban',
@@ -39,9 +39,7 @@ exports.default = {
             days: 7
         });
         interaction.reply({
-            content: `You banned <@${target.id}>`,
-            ephemeral: true,
+            content: `You banned <@${target.id}> for ${reason}`,
         });
-        yield target.send(`**You have been banned from the *${guild.name}* Discord Server! Reason:** ${reason}`);
     })
 };

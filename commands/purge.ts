@@ -8,6 +8,8 @@ export default {
     slash: true,
     expectedArgs: '<amount>',
     expectedArgsTypes: ['NUMBER'],
+
+    testOnly: true,
     
     callback: async ({ message, channel, interaction }) => {
         const amount = interaction.options.getNumber('amount')!
