@@ -17,7 +17,8 @@ exports.default = {
     minArgs: 1,
     expectedArgs: '<user>',
     expectedArgsTypes: ['USER'],
-    testOnly: true,
+    permissions: ['BAN_MEMBERS'],
+    // testOnly: true,
     callback: ({ interaction, user, guild }) => __awaiter(void 0, void 0, void 0, function* () {
         let target = interaction.options.getMember('user');
         target === null || target === void 0 ? void 0 : target.ban({
