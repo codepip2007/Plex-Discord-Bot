@@ -4,7 +4,7 @@ exports.config = void 0;
 exports.default = (client) => {
     const statusOptions = [
         'Plex',
-        '/plex for commands',
+        'making sure you\'re behaving',
     ];
     let counter = 0;
     const updateStatus = () => {

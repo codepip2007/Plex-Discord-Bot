@@ -3,7 +3,7 @@ import { Client } from "discord.js";
 export default (client: Client) => {
     const statusOptions = [
         'Plex',
-        '/plex for commands',
+        'making sure you\'re behaving',
     ]
     let counter = 0
 

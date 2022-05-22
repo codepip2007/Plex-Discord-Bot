@@ -3,12 +3,16 @@ import WOKCommands from 'wokcommands'
 import path from 'path'
 import 'dotenv/config'
 
-const client = new DiscordJS.Client({
+export const client = new DiscordJS.Client({
   // These intents are recommended for the built in help menu
   intents: [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MESSAGES,
     Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    Intents.FLAGS.GUILD_MEMBERS,
+    Intents.FLAGS.GUILD_PRESENCES,
+    Intents.FLAGS.GUILD_SCHEDULED_EVENTS,
+    Intents.FLAGS.GUILD_BANS,
   ],
 })
 client.on('ready', () => {
@@ -24,7 +28,7 @@ client.on('ready', () => {
     // Allow importing of .ts files if you are using ts-node
     typeScript: false,
     // Specify which are the Test Servers
-    testServers: '949962861369765898',
+    testServers: ['949962861369765898', '939091496760668160'],
     // Specify which users are bot owners
     botOwners: '759374512256057344',
     // Pass in the new dbOptions
@@ -61,10 +65,27 @@ client.on('ready', () => {
     ])
   
  });
+
+const Filter = require('bad-words')
+  const filter = new Filter()
+
+let whiteList = ['crap', 'fart', 'turd', 'poop', 'damn']
+filter.removeWords(...whiteList)
+
+client.on('message', msg => {
+  if (filter.isProfane(msg.content)) {
+    msg.delete().catch(err => console.log(err))
+    msg.reply(`${msg.author} NO SWEARING!!!`).then(r => {
+      setTimeout(() => r.delete(), 3000)
+    })
+  }
+})
+
+
   process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);
   });
 
   // Login to the client
-client.login(process.env.TOKENTEST)
+client.login(process.env.TOKEN)
 

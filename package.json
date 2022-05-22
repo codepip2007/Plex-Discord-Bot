@@ -13,9 +13,11 @@
   "dependencies": {
     "@types/node": "^16.11.8",
     "axios": "^0.24.0",
+    "bad-words": "^3.0.4",
     "discord.js": "^13.6.0",
     "dotenv": "^10.0.0",
     "mongoose": "^6.0.13",
+    "mongoose-unique-validator": "^3.0.0",
     "node.js": "0.0.1-security",
     "wokcommands": "^1.5.3"
   },
