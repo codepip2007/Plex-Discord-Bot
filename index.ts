@@ -16,6 +16,7 @@ export const client = new DiscordJS.Client({
   ],
 })
 client.on('ready', () => {
+  console.log('Ready!')
   const dbOptions = {
     // These are the default values
     keepAlive: true
@@ -28,7 +29,7 @@ client.on('ready', () => {
     // Allow importing of .ts files if you are using ts-node
     typeScript: false,
     // Specify which are the Test Servers
-    testServers: ['949962861369765898', '939091496760668160'],
+    testServers: ['949962861369765898'],
     // Specify which users are bot owners
     botOwners: '759374512256057344',
     // Pass in the new dbOptions
@@ -66,21 +67,20 @@ client.on('ready', () => {
   
  });
 
-const Filter = require('bad-words')
-  const filter = new Filter()
+ const Filter = require('bad-words')
+    const filter = new Filter()
 
-let whiteList = ['crap', 'fart', 'turd', 'poop', 'damn']
-filter.removeWords(...whiteList)
+    let whiteList = ['crap', 'fart', 'turd', 'poop', 'damn']
+    filter.removeWords(...whiteList)
 
-client.on('message', msg => {
-  if (filter.isProfane(msg.content)) {
-    msg.delete().catch(err => console.log(err))
-    msg.reply(`${msg.author} NO SWEARING!!!`).then(r => {
-      setTimeout(() => r.delete(), 3000)
+    client.on('messageCreate', msg => {
+        if (filter.isProfane(msg.content)) {
+            msg.delete().catch(err => console.log(err))
+            msg.channel.send(`${msg.author} NO SWEARING!!!`).then(r => {
+                setTimeout(() => r.delete(), 3000)
+            })
+        }
     })
-  }
-})
-
 
   process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);

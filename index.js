@@ -40,6 +40,7 @@ exports.client = new discord_js_1.default.Client({
     ],
 });
 exports.client.on('ready', () => {
+    console.log('Ready!');
     const dbOptions = {
         // These are the default values
         keepAlive: true
@@ -52,7 +53,7 @@ exports.client.on('ready', () => {
         // Allow importing of .ts files if you are using ts-node
         typeScript: false,
         // Specify which are the Test Servers
-        testServers: ['949962861369765898', '939091496760668160'],
+        testServers: ['949962861369765898'],
         // Specify which users are bot owners
         botOwners: '759374512256057344',
         // Pass in the new dbOptions
@@ -92,10 +93,10 @@ const Filter = require('bad-words');
 const filter = new Filter();
 let whiteList = ['crap', 'fart', 'turd', 'poop', 'damn'];
 filter.removeWords(...whiteList);
-exports.client.on('message', msg => {
+exports.client.on('messageCreate', msg => {
     if (filter.isProfane(msg.content)) {
         msg.delete().catch(err => console.log(err));
-        msg.reply(`${msg.author} NO SWEARING!!!`).then(r => {
+        msg.channel.send(`${msg.author} NO SWEARING!!!`).then(r => {
             setTimeout(() => r.delete(), 3000);
         });
     }
