@@ -1,37 +1,35 @@
-// import { Client } from 'discord.js';
-// import DiscordUser from '../models/DiscordUser';
+import { Client, TextChannel } from 'discord.js';
+import DiscordUser from '../models/DiscordUser';
 
-// export default (client: Client) => {
-//     const recordMembers = async () => {
-//         const guild = client.guilds.cache.get("939091496760668160")
+export default (client: Client) => {
+    client.on('guildMemberAdd', async (member) => {
+        let logChannel = client.guilds.cache.get('939091496760668160')?.channels.cache.get('949961552881127464') as TextChannel
 
-//         guild!.members.fetch().then(members => {
-//             members.forEach(async member => {
-//                 await DiscordUser.create({
-//                     id: member.id,
-//                     avatar: member.avatarURL(),
-//                     username: member.user.username,
-//                     discriminator: member.user.discriminator,
-//                     roles: member.roles,
-//                     nickname: member.nickname,
-//                     joined: member.joinedTimestamp,
-//                     allowed: true,
-//                     ban: {
-//                         kind: 'none',
-//                         reason: '',
-//                         expires: new Date(Date.now())
-//                     },
-//                     last_update: new Date(Date.now()),
-//                 })
-//             })
-//         })
+        try {
+            await new DiscordUser({
+                id: member.id,
+                avatar: member.avatar,
+                username: member.user.username,
+                discriminator: member.user.discriminator,
+                roles: member.roles,
+                nickname: member.displayName,
+                joined: member.joinedTimestamp,
+                ban: {
+                    kind: 'none',
+                    reason: '',
+                    expires: ''
+                },
+                last_update: new Date(Date.now())
+            }).save()
+            logChannel.send(`<@${member}> joined and added to database`)
+        } catch (err) {
+            logChannel.send(`<@${member}> joined, error adding to database, check logs!`)
+            console.log(err)
+        }
+    })
+}
 
-//         setTimeout(recordMembers, 1000 * 60 * 15)
-//     }
-//     recordMembers()
-// }
-
-// export const config = {
-//     dbName: 'MEMBER_LIST',
-//     displayname: 'Member List'
-// }
+export const config = {
+    dbName: 'MEMBER_LIST',
+    displayName: 'Member List'
+}

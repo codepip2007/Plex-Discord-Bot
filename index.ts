@@ -27,9 +27,9 @@ client.on('ready', () => {
     // The name of the local folder for your feature files
     featuresDir: path.join(__dirname, 'features'),
     // Allow importing of .ts files if you are using ts-node
-    typeScript: false,
+    typeScript: true,
     // Specify which are the Test Servers
-    testServers: ['949962861369765898'],
+    testServers: ['949962861369765898', '939091496760668160'],
     // Specify which users are bot owners
     botOwners: '759374512256057344',
     // Pass in the new dbOptions

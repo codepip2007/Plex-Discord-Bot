@@ -15,7 +15,7 @@ exports.default = () => {
     index_1.client.on('guildMemberAdd', (member) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         let welcomeChannel = (_a = index_1.client.guilds.cache.get('939091496760668160')) === null || _a === void 0 ? void 0 : _a.channels.cache.get('959233753304154132');
-        let welcomeMessage = `Hey ${member}! Welcome to **Pip's Server**! Make sure you:\n> Read the rules in <#939092358266503209>\n> Verify yourself in <#960128401954451496>\n> Check our the available resources in <#939091496760668164>\n> Get access to various topic-based channels, and sign up for notifications in <#945187335073591306>\n> Let us know who you are in <#945189771150508033>\n\nWelcome to the server, if you see something against the rules, report is using the \`/report\` command. Enjoy!`;
+        let welcomeMessage = `Hey ${member}! Welcome to **Pip's Server**! Make sure you:\n> Read the rules in <#939092358266503209>\n> Verify yourself in <#960128401954451496>\n> Check out the available resources in <#939091496760668164>\n> Get access to various topic-based channels, and sign up for notifications in <#945187335073591306>\n> Let us know who you are in <#945189771150508033>\n\nWelcome to the server, if you see something against the rules, report is using the \`/report\` command. Enjoy!`;
         welcomeChannel.send(`${welcomeMessage}`);
     }));
     index_1.client.on('guildMemberRemove', (member) => __awaiter(void 0, void 0, void 0, function* () {

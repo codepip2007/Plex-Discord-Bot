@@ -28,15 +28,14 @@ const DiscordUserSchema = new mongoose.Schema({
     roles: [String],
     nickname: String,
     joined: Number,
-    allowed: Boolean,
     ban: {
         kind: {
             type: String,
-            lowercase: true,
-            maxLength: 4
+            enum: ['none', 'mute', 'hard'],
+            default: 'none'
         },
         reason: String,
-        expires: Date
+        expires: Date | String
     },
     last_update: Date,
 }, {

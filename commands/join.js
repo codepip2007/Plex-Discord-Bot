@@ -12,11 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.config = void 0;
 const DiscordUser_1 = __importDefault(require("../models/DiscordUser"));
-exports.default = (client) => {
-    client.on('guildMemberAdd', (member) => __awaiter(void 0, void 0, void 0, function* () {
+exports.default = {
+    category: 'Moderation',
+    description: 'Adds a user to the database',
+    slash: false,
+    guildOnly: true,
+    requireRoles: true,
+    minArgs: 1,
+    expectedArgs: '<user>',
+    expectedArgsTypes: ['USER'],
+    testOnly: true,
+    callback: ({ message, client }) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
+        let member = message.mentions.members.first();
         let logChannel = (_a = client.guilds.cache.get('939091496760668160')) === null || _a === void 0 ? void 0 : _a.channels.cache.get('949961552881127464');
         try {
             yield new DiscordUser_1.default({
@@ -24,7 +33,7 @@ exports.default = (client) => {
                 avatar: member.avatar,
                 username: member.user.username,
                 discriminator: member.user.discriminator,
-                roles: member.roles,
+                roles: member.roles.highest,
                 nickname: member.displayName,
                 joined: member.joinedTimestamp,
                 ban: {
@@ -34,15 +43,13 @@ exports.default = (client) => {
                 },
                 last_update: new Date(Date.now())
             }).save();
-            logChannel.send(`<@${member}> joined and added to database`);
+            logChannel.send(`${member} added to database`);
+            // interaction.reply(`${member} added to database`)
         }
         catch (err) {
-            logChannel.send(`<@${member}> joined, error adding to database, check logs!`);
+            logChannel.send(`Error adding ${member} to database, check logs!`);
+            // interaction.reply(`Error adding ${member} to database, check logs!`)
             console.log(err);
         }
-    }));
-};
-exports.config = {
-    dbName: 'MEMBER_LIST',
-    displayName: 'Member List'
+    })
 };
