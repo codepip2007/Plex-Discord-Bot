@@ -35,7 +35,7 @@ const DiscordUserSchema = new mongoose.Schema({
             default: 'none'
         },
         reason: String,
-        expires: Date | String
+        expires: Date
     },
     last_update: Date,
 }, {
